@@ -9,7 +9,7 @@
 
 \usepackage{mVersion}
     \increaseBuild
-    \setVersion{0.1}
+    \setVersion{0.2}
 
 \usepackage{csquotes}
 \usepackage{babel}
@@ -37,11 +37,7 @@
 \usepackage{enumitem}
 
 \setcounter{secnumdepth}{0}
-\let\originalthefigure\thefigure
-\let\originalthetable\thetable
 \makeatletter 
-    \renewcommand{\thefigure}{\textallsc{S}\@arabic\c@figure}
-    \renewcommand{\thetable}{\textallsc{S}\@arabic\c@table}
     \renewcommand\listoffigures{%
 	    \@starttoc{lof}%
     }
@@ -80,11 +76,6 @@
 
 To assess the effects of variation in the timing of ichthyosaur evolution on discrete evolutionary rates, we further used the minimum branch length (MBL) tree-scaling method \autocite{Bapst2012, Laurin2004SystBiol}. This scales the tree according to occurrence dates, but ensures that each branch length is greater than a given value, rescaling ancestral branches as necessary to ensure this minimum length. Here, we used a MBL of \SI{1}{\mega\annum} as a reasonable minimum between speciation events and to avoid forcing excessive branch lengths where speciation may occur rapidly. We used the same sample of 120 phylogenetic trees as the main analysis from the Bayesian phylogenetic posterior distribution of \textcite{Moon2019a}. Trees were time-scaled in R \autocite{R} using the function \texttt{timePaleoPhy} in the package paleotree \autocite{Bapst2012} with point ages sampled from a uniform distribution between their first and last occurrences. Each tree was resampled 10 times to account for the occurrence ranges for each taxon (120 tree topologies × 10 samples = 1200 time-scaled trees total). These MBL time-scaled trees were then used for a further set of discrete character evolutionary rates analyses using function \texttt{DiscreteCharacterRate} of R package Claddis \autocite{Lloyd2016}. The results of this were used to produce `spaghetti' plots for epoch-length bins and equal-length bins using modified scripts from \textcite{Close2015a}. Code for all these analyses is included in Supplemental~\ref{disparity-discrete-code}.
 
-\paragraph{Diversity.}\label{diversity}
-
-% FIXME: remove the diversity bit?
-To show ichthyosaur diversity through the Mesozoic we used a combination of taxic diversity from raw per-bin occurrence counts and phylogenetic diversity incorporating the time-scaled trees. For this we used the functions \texttt{taxicDivCont} and \texttt{phyloDiv}, for taxic and phylogenetic diversity respectively, from the R package paleotree\autocite{Bapst2012}. Data were divided into trees scaled using the Hedman and MBL methods, and then binned both by epoch and by equal-length \SI{10}{\mega\annum} bins. For phylogenetic diversity, the median value was taken, with error bars indicating the range of diversity in each bin. Code for this is included in Supplemental~\ref{disparity-discrete-code}.
-
 \paragraph{Additional disparity metrics.}
 
 Our main results present ichthyosauriform disparity using per-bin pairwise differences between taxa from a distance matrix calculated using maximum observed rescaled distances \autocite{Lloyd2016}. Additionally, we compared different distance conversion and disparity metrics.
@@ -97,10 +88,6 @@ From the PCA data we used all the resultant axes to calculate per-bin sum of var
 
 
 \section{Supplemental results}\label{sec:supplemental-results}
-
-\paragraph{Diversity.}\label{par:diversity}
-
-Taxic and phylogenetic diversity curves are broadly concordant across the binning schemes used \pcref{fig:hedman-diversity,fig:mbl-diversity}. Phylogenetic diversity is variable depending on the tree topology and sampled dates. Nonetheless, the diversity curves show clearly effects of different binning schemes. Peak diversity occurs early in ichthyosaur evolution, whereas phylogenetic diversity is at its highest in either the Early Jurassic or \SIrange{251.3}{241.3}{\mega\annum} bins; a difference of \textasciitilde{}\SI{70}{\million\years}.
 
 \paragraph{Pairwise disparity.}\label{par:pairwise-disparity}
 
@@ -133,36 +120,12 @@ Using the MBL time-scaling method created trees with a root age of \SIrange{253.
 \listoffigures
 
 \begin{figure}[h]
-	\includegraphics[center]{supp_figures/outgroup_tre.pdf}
-    \caption[Skeleton tree of Ichthyosauriformes outgroup taxa used to date the ingroup tree in the Hedman method]{\textbf{Skeleton tree of Ichthyosauriformes outgroup taxa used to data the ingroup tree in the Hedman method.} Occurrence dates are included in \cref{tbl:outgroup-dates}.\label{fig:hedman-skeleton-tree}}
-\end{figure}
-
-\newgeometry{margin = 2cm}
-
-\begin{figure}[h]
-    \includegraphics[center]{supp_figures/figS1-hedman_diversity}
-    \caption[Taxic and phylogenetic diversity of ichthyosaurs through the Mesozoic]{\textbf{Taxic and phylogenetic diversity of ichthyosaurs through the Mesozoic.} Raw taxon occurrence counts and median phylogenetic diversity based on 108 time-scaled trees from \textcite{Moon2019a} using the \textcite{Hedman2010} tree-scaling method for \textbf{a}, epoch-bins and \textbf{b}, \SI{10}{\mega\annum} equal-length bins. Error bars show the range of phylogenetic diversity for each bin.\label{fig:hedman-diversity}}
-\end{figure}
-
-
-\begin{figure}[h]
-    \includegraphics[center]{supp_figures/figS2-mbl_diversity}
-    \caption[Taxic and phylogenetic diversity of ichthyosaurs though the Mesozoic]{\textbf{Taxic and phylogenetic diversity of ichthyosaurs though the Mesozoic.} Raw taxon occurrence counts and median phylogenetic diversity based on 1200 time-scaled trees from \textcite{Moon2019a} using the minimum branch length tree-scaling method for \textbf{a}, epoch-bins and \textbf{b}, \SI{10}{\mega\annum} equal-length bins. Error bars show the range of phylogenetic diversity for each bin.\label{fig:mbl-diversity}}
-\end{figure}
-
-\begin{figure}[h]
     % \includegraphics[width = \textheight, center]{supp_figures/figS3-pairwise_all}
     \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes though the Mesozoic]{(following page) \textbf{Per-bin discrete skeletal disparity of Ichthyosauriformes though the Mesozoic.} Pairwise and weighted pairwise dissimilarity measured from raw Euclidean (RAW), generalised Euclidean (GED), Gower (GOW), and maximum observed rescaled (MAX) distances between taxa in the cladistic dataset of \textcite{Moon2019a} binned into epochs and equal 10-million-year bins. Also, pairwise number of comparable characters between taxa (CHAR) indicating the variation in completeness and comparability in each bin. Mean values and 95\% confidence intervals are shown from 10,000 bootstrap replicates.\label{fig:pairwise-disparity}} 
 \end{figure} \FloatBarrier
 
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS3-pairwise_all.pdf}
 \FloatBarrier
-
-\begin{figure}[h]
-    \includegraphics[width = \textwidth, center]{supp_figures/figS4-scree_plot}
-    \caption[Variance described by each axis from eight principal coordinates analyses and correlation to the original dataset]{\textbf{Variance described by each axis from eight principal coordinates analyses and correlation to the original dataset.} Scree plots showing the variance from each resulting axis for PCA (lines) on each of the four distance matrices derived from the cladistic dataset of \textcite{Moon2019a} (RAW, GED, GOW, MAX), without (top row) and with (bottom row) the negative eigenvalue correction of \textcite{Caillez1983}. Correlation between the PCA data and original distance matrix is shown with dots. \label{fig:ordination-correlation}} 
-\end{figure}
-
 
 \begin{figure}[h]
     \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated data.} Ichthyosaur disparity represented by mean sum of variances, mean sum of ranges, and mean centroid distance from each of eight PCA (four distance matrices: RAW, GED, GOW, MAX; with and without negative eigenvalue correction) on the cladistic matrix of \textcite{Moon2019a}. Error bars show 95\% confidence intervals from 10,000 bootstrap replicates.\label{fig:ordinated-disparity}}
@@ -173,7 +136,7 @@ Using the MBL time-scaling method created trees with a root age of \SIrange{253.
 \FloatBarrier
 
 \begin{figure}[h]
-    \caption[Per-bin rarefaction curves for each disparity-time curve shown in Fig.\ \textallsc{S}5]{(following pages) \textbf{Per-bin rarefaction curves for each disparity-time curve shown in Fig. S5.} Disparity for each bin is sequentially rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from 10,000 bootstrap replicates.\label{fig:rarefaction-curves}}
+    \caption[Per-bin rarefaction curves for each disparity-time curve shown in \cref{fig:ordinated-disparity}]{(following pages) \textbf{Per-bin rarefaction curves for each disparity-time curve shown in \cref{fig:ordinated-disparity}} Disparity for each bin is sequentially rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from 10,000 bootstrap replicates.\label{fig:rarefaction-curves}}
 \end{figure}
 \FloatBarrier
 
@@ -192,27 +155,18 @@ Using the MBL time-scaling method created trees with a root age of \SIrange{253.
     \includegraphics[width = \textwidth, center]{supp_figures/figS8-rates_MBLspaghetti}
     \caption[Rates of discrete skeletal character evolution in Ichthyosauriformes]{\textbf{Rates of discrete skeletal character evolution in Ichthyosauriformes.} Calculated from the matrix of \textcite{Moon2019a} using 1200 time-scaled trees from the minimum branch length method. Rates of evolution are plotted in \textbf{a}, epoch-bins and \textbf{b}, equal-length 10-million-year bins. \label{fig:mbl-discrete-rates}} 
 \end{figure}
+\FloatBarrier
+ 
+\begin{figure}
+\caption[Rates of skull size evolution in Ichthyosauriformes]{(following
+	page) \textbf{Rates of skull size evolution in Ichthyosauriformes.}
+	Evolutionary rate results from 100 Hedman-dated phylogenies. Branches
+	are scaled and branches and taxon names coloured to the rate of skull
+	size change on that branch.} 
+\end{figure} 
+\FloatBarrier
 
-% \begin{figure} \caption[Rates of continuous skull length evolution in
-% Ichthyosauriformes]{(following pages) \textbf{Rates of continuous skull length
-% evolution in Ichthyosauriformes.} Consensus trees of variable rates model on
-% 100 time-scaled trees in BayesTraits using ichthyosauriform skull length data.
-% Branch lengths are shown both rescaled from the rate of continuous character
-% evolution and replaced by these rates also.} \end{figure} \FloatBarrier
-% 
-% \includepdf[pages = -, fitpaper = true]{supp_figures/figS9-bayestraits_consensus_trees.pdf}
-% \FloatBarrier
-% 
-% \begin{figure}
-% \caption[Rates of skull size evolution in Ichthyosauriformes]{(following
-% 	page) \textbf{Rates of skull size evolution in Ichthyosauriformes.}
-% 	Evolutionary rate results from 100 Hedman-dated phylogenies. Branches
-% 	are scaled and branches and taxon names coloured to the rate of skull
-% 	size change on that branch.} 
-% \end{figure} 
-% \FloatBarrier
-% 
-% \includepdf[pages = -, fitpaper = true]{supp_figures/figS10-bayestraits_trees_rates.pdf}
+\includepdf[pages = -, fitpaper = true]{supp_figures/figS10-bayestraits_trees_rates.pdf}
 
 \restoregeometry
 
