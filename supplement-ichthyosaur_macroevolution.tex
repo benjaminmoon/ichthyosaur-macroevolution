@@ -1,0 +1,282 @@
+% !TeX program = lualatex
+
+\documentclass[british,a4paper]{article}
+
+\usepackage{warnock}
+\setmonofont{Hasklig}[Scale = MatchLowercase]
+\usepackage{microtype}
+\newfontfamily\tableroman{Warnock Pro}[Scale=MatchLowercase, Numbers={Monospaced,OldStyle}]
+
+\usepackage{mVersion}
+    \increaseBuild
+    \setVersion{0.1}
+
+\usepackage{csquotes}
+\usepackage{babel}
+
+\usepackage{geometry}
+\usepackage{graphicx} 
+\usepackage[export]{adjustbox} \usepackage{rotating} \usepackage{placeins}
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhead{}\fancyfoot{}
+    \fancyhead[R]{\version}
+        \renewcommand{\headrulewidth}{0pt}
+    \fancyfoot[C]{\thepage}
+
+\usepackage{pdfpages}
+\usepackage{lscape}
+
+\usepackage{siunitx}
+	\sisetup{detect-all, number-text-rm = \tableroman,output-decimal-marker = \text{.},table-alignment = center}
+    \DeclareSIUnit{\annum}{a}
+    \DeclareSIUnit{\years}{y}
+    \DeclareSIPrefix\million{m}{6}
+\usepackage[cleanlook]{isodate}
+
+\usepackage{enumitem}
+
+\setcounter{secnumdepth}{0}
+\let\originalthefigure\thefigure
+\let\originalthetable\thetable
+\makeatletter 
+    \renewcommand{\thefigure}{\textallsc{S}\@arabic\c@figure}
+    \renewcommand{\thetable}{\textallsc{S}\@arabic\c@table}
+    \renewcommand\listoffigures{%
+	    \@starttoc{lof}%
+    }
+    \renewcommand\listoftables{%
+	    \@starttoc{lot}%
+    }
+\makeatother
+
+\usepackage{csvsimple}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage[style = nature, date = year]{biblatex}
+    \addbibresource{biblio.bib}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+    \newcommand\pcref[1]{(\cref{#1})}
+
+
+\title{Supplemental material for ‘Early high rates and disparity in the evolution of fish-shaped reptiles’}
+\author{Benjamin C.\ Moon \and Thomas L.\ Stubbs}
+\date{\today~\version}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Supplemental methods}\label{supplemental-methods}
+
+\paragraph{Comparison of time-scaling methods.}
+\label{comparison-of-time-scaling-methods}
+
+To assess the effects of variation in the timing of ichthyosaur evolution on discrete evolutionary rates, we further used the minimum branch length (MBL) tree-scaling method \autocite{Bapst2012, Laurin2004SystBiol}. This scales the tree according to occurrence dates, but ensures that each branch length is greater than a given value, rescaling ancestral branches as necessary to ensure this minimum length. Here, we used a MBL of \SI{1}{\mega\annum} as a reasonable minimum between speciation events and to avoid forcing excessive branch lengths where speciation may occur rapidly. We used the same sample of 120 phylogenetic trees as the main analysis from the Bayesian phylogenetic posterior distribution of \textcite{Moon2019a}. Trees were time-scaled in R \autocite{R} using the function \texttt{timePaleoPhy} in the package paleotree \autocite{Bapst2012} with point ages sampled from a uniform distribution between their first and last occurrences. Each tree was resampled 10 times to account for the occurrence ranges for each taxon (120 tree topologies × 10 samples = 1200 time-scaled trees total). These MBL time-scaled trees were then used for a further set of discrete character evolutionary rates analyses using function \texttt{DiscreteCharacterRate} of R package Claddis \autocite{Lloyd2016}. The results of this were used to produce `spaghetti' plots for epoch-length bins and equal-length bins using modified scripts from \textcite{Close2015a}. Code for all these analyses is included in Supplemental~\ref{disparity-discrete-code}.
+
+\paragraph{Diversity.}\label{diversity}
+
+% FIXME: remove the diversity bit?
+To show ichthyosaur diversity through the Mesozoic we used a combination of taxic diversity from raw per-bin occurrence counts and phylogenetic diversity incorporating the time-scaled trees. For this we used the functions \texttt{taxicDivCont} and \texttt{phyloDiv}, for taxic and phylogenetic diversity respectively, from the R package paleotree\autocite{Bapst2012}. Data were divided into trees scaled using the Hedman and MBL methods, and then binned both by epoch and by equal-length \SI{10}{\mega\annum} bins. For phylogenetic diversity, the median value was taken, with error bars indicating the range of diversity in each bin. Code for this is included in Supplemental~\ref{disparity-discrete-code}.
+
+\paragraph{Additional disparity metrics.}
+
+Our main results present ichthyosauriform disparity using per-bin pairwise differences between taxa from a distance matrix calculated using maximum observed rescaled distances \autocite{Lloyd2016}. Additionally, we compared different distance conversion and disparity metrics.
+
+Claddis provides four distance metrics for discrete character data \autocite{Lloyd2016}: raw Euclidean distances (RAW), generalized Euclidean distances (GED) \autocite{Wills1994}, Gower's coefficient (GOW) \autocite{Gower1971}, and maximum observable rescaled distances (MAX) \autocite{Lloyd2016}. All four distance metrics were run through the same disparity work flow. Recent studies have shown that GED as implemented in Claddis is susceptible to the completeness of the original data matrix, which may have a strong effect on the resulting disparity \autocite{Flannery-Sutherland2019, Lehmann2019}; therefore we prefer MAX.
+
+Similarly, several different disparity metrics have been developed, each with varying properties. Our main results present mean and weighted mean pairwise distances on MAX as this comes directly from the original data matrix, but we also calculated the pairwise distances for RAW, GED, and GOW distances matrices \pcref{fig:pairwise-disparity}. We ordinated the data using Principal Coordinates Analysis (PCA), both with and without applying a correction to negative eigenvalues \autocite{Caillez1983} and compared the correlation of the PCA data with the original distance matrix. 
+
+From the PCA data we used all the resultant axes to calculate per-bin sum of variances, sum of ranges, and centroid distances. These metrics have been used extensively in previous analyses \autocite{Wills1998, Thorne2011, Flannery-Sutherland2019}, so we considered it pertinent to compare them. Binning, bootstrap resampling with 10~000 replicates, and complete rarefaction were completed using the functions \texttt{custom.subsets} and \texttt{boot.matrix}, and disparity calculations used the function \texttt{dispRity}, all from package dispRity \autocite{Guillerme2018b} in R. Code for this is included in Supplemental~\ref{disparity-discrete-code}.
+
+
+\section{Supplemental results}\label{sec:supplemental-results}
+
+\paragraph{Diversity.}\label{par:diversity}
+
+Taxic and phylogenetic diversity curves are broadly concordant across the binning schemes used \pcref{fig:hedman-diversity,fig:mbl-diversity}. Phylogenetic diversity is variable depending on the tree topology and sampled dates. Nonetheless, the diversity curves show clearly effects of different binning schemes. Peak diversity occurs early in ichthyosaur evolution, whereas phylogenetic diversity is at its highest in either the Early Jurassic or \SIrange{251.3}{241.3}{\mega\annum} bins; a difference of \textasciitilde{}\SI{70}{\million\years}.
+
+\paragraph{Pairwise disparity.}\label{par:pairwise-disparity}
+
+Broadly speaking, trends in disparity across all four distance matrices are similar: disparity peaks in the Late Triassic then declines through the Jurassic and Cretaceous \pcref{fig:pairwise-disparity}. The bins that preserve the most completely coded taxa (\cref{fig:pairwise-disparity} CHAR: Early Jurassic; \SIrange{201.3}{171.3}{\mega\annum}) also show relatively increased disparity in RAW and GED distance matrices compared to GOW and MAX. Indeed, the earliest Jurassic bins are the most disparate for the RAW distance metric with both binning schemes, and for GED the earliest Jurassic bins have relatively higher disparity than GOW and MAX distance matrices. This is most likely a further effect of incompleteness degrading the disparity signal by averaging the difference between taxa \autocite{Flannery-Sutherland2019, Lehmann2019}, therefore we prefer the results given by GOW and MAX distance matrices.
+
+\paragraph{Correlation of ordinated data.}\label{par:pco-correlation}
+
+Negative eigenvalue correction notably decreased the variance described by the first few principal coordinate axes. The highest correlations between the original and ordinated data were found when including all ordinated axes \pcref{fig:ordination-correlation}. Without negative eigenvalue correction RAW and GED had the highest correlation, whereas GOW and MAX were reduced to \textasciitilde{}0.8. With negative eigenvalue correction the pattern of correlations with increasing number of axes was more complex: RAW gradually increased whereas GED strongly decreased, but both rapidly increased to 1.0 with the last axes; GOW and MAX correlations both immediately decreased, increased to a peak at \textasciitilde{}axis 60, then rapidly increased again when including the last axes.
+
+\paragraph{Disparity of ordinated data.}\label{par:ordinated-disparity}
+
+\textcite{Wills1998} asserted that variance based disparity metrics are more suited to measuring overall dissimilarity whereas range-based metrics are appropriate for disparity as they are affected by occurrence and thus show the diversification of morphology. In this context, our results support our conclusions that ichthyosaurs represent an early burst of evolution: both of these metrics show initial high disparity from all distance matrices (\cref{fig:ordinated-disparity}). Sum of variances also has a marked increase between the Early to Middle Triassic and a substantial decline in disparity between the Late Triassic–Early Jurassic in the combination of GOW/MAX distance matrix and uncorrected PCO; otherwise all curves follow similar t{}rends. Sum of variances proves more resilient to sample size in rarefaction than either sum of ranges or centroid distance (\cref{fig:rarefaction-curves}).
+
+All sum of ranges curves display the same trends in disparity, differing only in the magnitude. Similarly, we find early high disparity and an increase between the Early–Middle Triassic (\cref{fig:ordinated-disparity}). Disparity decreases substantially through the later Triassic, but broadly recovers in the Early Jurassic before more log-term decline through to the extinction of the ichthyosaurs. Particularly low dis{}parity (e.g. Middle Jurassic; \SIrange{171.3} {161.3}{\mega\annum}) are those represented by few taxa and relative incompleteness.
+
+In the case of centroid distance, although this has been shown to be especially susceptible to issues of centroid slippage' \autocite{Flannery-Sutherland2019, Lehmann2019}, our results show the same trends as for sum of variances: high early disparity that is sustained through to the Late Jurassic/Early Cretaceous before decline, with dips that are most likely related to incompleteness of specimens (\cref{fig:ordinated-disparity}).
+
+\paragraph{Morphospace occupation of ordinated data.}\label{par:ordinated-morphospace}
+
+Morphospace occupation between Triassic and post-Triassic Ichthyosauriformes is separated in almost all cases (\cref{fig:morphospace-plots}; except RAW and GED distances). Late Triassic taxa are also separated from earlier Triassic taxa in GOW and MAX distance without negative eigenvalue correction, and are consistently positioned more closely towards the Early Jurassic taxa. The variation in Jurassic and Cretaceous taxa is markedly increased in RAW and GED distances relative to GOW and MAX. Differences within Jurassic and Cretaceous taxa are more represented in PCo axis 2 than axis 3 in the RAW and GED morphospace plots, but in a combination of PCO axes 1 and 3 in GOW and MAX. All RAW and GED morphospace plots show more points towards the origins of the plots than GOW and MAX, a results of 'centroid slippage' \autocite{Flannery-Sutherland2019, Lehmann2019}; in particular these represent the least complete taxa.
+
+\paragraph{Time-scaling and rates.}\label{par:mbl-scaling-rates}
+
+Using the MBL time-scaling method created trees with a root age of \SIrange{253.8}{268.5}{\mega\annum}; older than the corresponding root ages from the Hedman scaling method. Rates of discrete character evolution are relatively lower for during the Early–Middle Triassic, but these earlier bins nonetheless show significantly higher rates of evolution that subsequent bins \pcref{fig:mbl-discrete-rates}. Trends across the whole of ichthyosaur evolution remain similar, although there are increased peaks in the later Early Jurassic and the Late Cretaceous bins. Significantly low rates of discrete character evolution are reached in the Early Jurassic (epoch bins) or Late Triassic (\SI{10}{\mega\annum} bins).
+
+
+
+\section{Supplemental figures}\label{sec:supplemental-figures}
+
+\listoffigures
+
+\begin{figure}[h]
+	\includegraphics[center]{supp_figures/outgroup_tre.pdf}
+    \caption[Skeleton tree of Ichthyosauriformes outgroup taxa used to date the ingroup tree in the Hedman method]{\textbf{Skeleton tree of Ichthyosauriformes outgroup taxa used to data the ingroup tree in the Hedman method.} Occurrence dates are included in \cref{tbl:outgroup-dates}.\label{fig:hedman-skeleton-tree}}
+\end{figure}
+
+\newgeometry{margin = 2cm}
+
+\begin{figure}[h]
+    \includegraphics[center]{supp_figures/figS1-hedman_diversity}
+    \caption[Taxic and phylogenetic diversity of ichthyosaurs through the Mesozoic]{\textbf{Taxic and phylogenetic diversity of ichthyosaurs through the Mesozoic.} Raw taxon occurrence counts and median phylogenetic diversity based on 108 time-scaled trees from \textcite{Moon2019a} using the \textcite{Hedman2010} tree-scaling method for \textbf{a}, epoch-bins and \textbf{b}, \SI{10}{\mega\annum} equal-length bins. Error bars show the range of phylogenetic diversity for each bin.\label{fig:hedman-diversity}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[center]{supp_figures/figS2-mbl_diversity}
+    \caption[Taxic and phylogenetic diversity of ichthyosaurs though the Mesozoic]{\textbf{Taxic and phylogenetic diversity of ichthyosaurs though the Mesozoic.} Raw taxon occurrence counts and median phylogenetic diversity based on 1200 time-scaled trees from \textcite{Moon2019a} using the minimum branch length tree-scaling method for \textbf{a}, epoch-bins and \textbf{b}, \SI{10}{\mega\annum} equal-length bins. Error bars show the range of phylogenetic diversity for each bin.\label{fig:mbl-diversity}}
+\end{figure}
+
+\begin{figure}[h]
+    % \includegraphics[width = \textheight, center]{supp_figures/figS3-pairwise_all}
+    \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes though the Mesozoic]{(following page) \textbf{Per-bin discrete skeletal disparity of Ichthyosauriformes though the Mesozoic.} Pairwise and weighted pairwise dissimilarity measured from raw Euclidean (RAW), generalised Euclidean (GED), Gower (GOW), and maximum observed rescaled (MAX) distances between taxa in the cladistic dataset of \textcite{Moon2019a} binned into epochs and equal 10-million-year bins. Also, pairwise number of comparable characters between taxa (CHAR) indicating the variation in completeness and comparability in each bin. Mean values and 95\% confidence intervals are shown from 10,000 bootstrap replicates.\label{fig:pairwise-disparity}} 
+\end{figure} \FloatBarrier
+
+\includepdf[pages = -, fitpaper = true]{supp_figures/figS3-pairwise_all.pdf}
+\FloatBarrier
+
+\begin{figure}[h]
+    \includegraphics[width = \textwidth, center]{supp_figures/figS4-scree_plot}
+    \caption[Variance described by each axis from eight principal coordinates analyses and correlation to the original dataset]{\textbf{Variance described by each axis from eight principal coordinates analyses and correlation to the original dataset.} Scree plots showing the variance from each resulting axis for PCA (lines) on each of the four distance matrices derived from the cladistic dataset of \textcite{Moon2019a} (RAW, GED, GOW, MAX), without (top row) and with (bottom row) the negative eigenvalue correction of \textcite{Caillez1983}. Correlation between the PCA data and original distance matrix is shown with dots. \label{fig:ordination-correlation}} 
+\end{figure}
+
+
+\begin{figure}[h]
+    \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated data.} Ichthyosaur disparity represented by mean sum of variances, mean sum of ranges, and mean centroid distance from each of eight PCA (four distance matrices: RAW, GED, GOW, MAX; with and without negative eigenvalue correction) on the cladistic matrix of \textcite{Moon2019a}. Error bars show 95\% confidence intervals from 10,000 bootstrap replicates.\label{fig:ordinated-disparity}}
+\end{figure}
+\FloatBarrier
+
+\includepdf[pages=-, fitpaper = true]{supp_figures/figS5-disparity_time.pdf}
+\FloatBarrier
+
+\begin{figure}[h]
+    \caption[Per-bin rarefaction curves for each disparity-time curve shown in Fig.\ \textallsc{S}5]{(following pages) \textbf{Per-bin rarefaction curves for each disparity-time curve shown in Fig. S5.} Disparity for each bin is sequentially rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from 10,000 bootstrap replicates.\label{fig:rarefaction-curves}}
+\end{figure}
+\FloatBarrier
+
+\includepdf[pages = -, fitpaper = true]{supp_figures/figS6-rarefaction_curves.pdf}
+\FloatBarrier
+
+\begin{figure}[h]
+    \caption[Morphospace occupation of Ichthyosauriformes through the Mesozoic]{(following pages) \textbf{Morphospace occupation of Ichthyosauriformes through the Mesozoic.} Principal coordinate axis 1 against axes 2 (top row) and 3 (bottom row) from each of eight PCA (four distance matrices: RAW, GED, GOW, MAX; with and without negative eigenvalue correction) on the cladistic matrix of \textcite{Moon2019a} binned into epochs.\label{fig:morphospace-plots}}
+\end{figure}
+\FloatBarrier
+
+\includepdf[pages = -, fitpaper = true]{supp_figures/figS7-all_morphospace.pdf}
+
+
+\begin{figure}[h]
+    \includegraphics[width = \textwidth, center]{supp_figures/figS8-rates_MBLspaghetti}
+    \caption[Rates of discrete skeletal character evolution in Ichthyosauriformes]{\textbf{Rates of discrete skeletal character evolution in Ichthyosauriformes.} Calculated from the matrix of \textcite{Moon2019a} using 1200 time-scaled trees from the minimum branch length method. Rates of evolution are plotted in \textbf{a}, epoch-bins and \textbf{b}, equal-length 10-million-year bins. \label{fig:mbl-discrete-rates}} 
+\end{figure}
+
+% \begin{figure} \caption[Rates of continuous skull length evolution in
+% Ichthyosauriformes]{(following pages) \textbf{Rates of continuous skull length
+% evolution in Ichthyosauriformes.} Consensus trees of variable rates model on
+% 100 time-scaled trees in BayesTraits using ichthyosauriform skull length data.
+% Branch lengths are shown both rescaled from the rate of continuous character
+% evolution and replaced by these rates also.} \end{figure} \FloatBarrier
+% 
+% \includepdf[pages = -, fitpaper = true]{supp_figures/figS9-bayestraits_consensus_trees.pdf}
+% \FloatBarrier
+% 
+% \begin{figure}
+% \caption[Rates of skull size evolution in Ichthyosauriformes]{(following
+% 	page) \textbf{Rates of skull size evolution in Ichthyosauriformes.}
+% 	Evolutionary rate results from 100 Hedman-dated phylogenies. Branches
+% 	are scaled and branches and taxon names coloured to the rate of skull
+% 	size change on that branch.} 
+% \end{figure} 
+% \FloatBarrier
+% 
+% \includepdf[pages = -, fitpaper = true]{supp_figures/figS10-bayestraits_trees_rates.pdf}
+
+\restoregeometry
+
+\section{Supplementary tables}\label{supplementary-tables}
+
+\listoftables
+
+\begin{table}[h]
+	\caption[Bin boundaries of \SI{10}{\mega\annum} bins used in this study]{\textbf{Bin boundaries of \SI{10}{\mega\annum} bins used in this study.} Approximate age ranges are given as indicators.\label{tbl:ten-ma-bins}}
+	\csvreader[%
+		centered tabular = rSSl,
+		table head = {\toprule {Bin} & {Start (\si{\mega\annum})} & {End (\si{\mega\annum})} & {Approximate age range} \\\midrule},
+		table foot = \bottomrule]%
+		{supp_tables/10ma-dates.csv}%
+		{}%
+		{\csvlinetotablerow}
+\end{table}
+
+\begin{table}[h]
+    \caption[Occurrence dates of outgroup taxa used to date the tree of Ichthyosauriformes]{\textbf{Occurrence dates of outgroup taxa used to date the tree of Ichthyosauriformes.} Stratigraphic occurrence intervals are taken from the given references. Occurrences are converted to absolute ages using \textcite{Gradstein2012}. FAD, first appearance date; FAS, first appearance stratigraphy; LAD, last appearance date; LAS, last appearance stratigraphy.\label{tbl:outgroup-dates}}
+    \small
+    \csvreader[%
+	    tabular = >{\itshape}lSSlll,
+	    table head = \toprule \emph{Taxon} & {FAD (\si{\mega\annum})} & {LAD (\si{\mega\annum})} & FAS & LAS & Reference\\\midrule,
+        late after last line = \\\bottomrule]%
+        {supp_tables/outgroup_dates.csv}%
+        {Taxon=\taxon,FAD=\fad,LAD=\lad,FAStrat=\fas,LAStrat=\las,Reference=\ref}%
+        {\taxon & \fad & \lad & \fas & \las & \ref}
+\end{table}
+
+\begin{landscape}
+	{\footnotesize%\defaultfontfeatures+{Numbers = {OldStyle,Monospaced}}
+		\input{supp_tables/ichthyosaur_occurrences_stratigraphy}
+	}
+\end{landscape}
+
+
+
+{\small%\addfontfeatures{Numbers = Monospaced}
+	\csvreader[longtable = {>{\itshape}lSS[table-format=1.3]l},
+	    table head = {
+	        \caption[Skull lengths of Ichthyosauriformes included in the analyses]{{\normalsize\textbf{Skull lengths of Ichthyosauriformes included in the analyses.} Logarithm values are shown to 3~d.p.\label{tbl:ingroup-lengths}}}\\
+	        \toprule
+	        \emph{Taxon} & {Skull length (\si{\milli\metre})} & {log\textsubscript{10}~(Skull length (\si{\milli\metre}))} & {References}\\\midrule\endfirsthead
+	        \caption*{Table~\thetable{} continued}\\
+	        \toprule\emph{Taxon} & {Skull length (\si{\milli\metre})} & {log\textsubscript{10}~(Skull length (\si{\milli\metre}))} & {References}\\\midrule\endhead
+	        \bottomrule\endfoot
+	        \bottomrule\endlastfoot}]%
+	    {supp_tables/ichthyosaur_lengths.csv}%
+	    {Taxon=\taxon,sklen=\sklen,lsklen=\lsklen,refs=\refs}%
+	    {\taxon & \sklen & \lsklen & \cite*{\refs}}
+}
+
+
+\section{Supplemental code}\label{supplemental-code}
+
+\begin{enumerate}[label = \textbf{Code \textallsc{S\arabic*}}, align = left,
+    ref = {Code \textallsc{S\arabic*}}]
+    \item \textbf{R code implementing the disparity, principal coordinates, diversity, and discrete character rates analyses.} This set of five scripts contains the code used to run the main discrete character analyses in R. Outputs include time-scaled trees, discrete rates of evolution, stratigraphic congruence values; PDF files of all figures produced; CSV files of root ages from the time-scaled trees, stratigraphic congruence tests, and statistical tests (pairwise PERMANOVA between epochs for PCA data and pairwise \emph{t}-tests of per-bin disparity).\label{disparity-discrete-code}
+    \item \textbf{Continuous rates analyses in BayesTraits and plotting in R.} Rates analyses were run individually on 100 time-scaled trees then combined into consensus trees with branch rates averaged across all runs. Also includes code to create the traitgram of Fig.~4.\label{bayestraits-code}
+\end{enumerate}
+
+\printbibliography
+
+\end{document}
+
+% vim: tw=80 fo=cjqt
