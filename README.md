@@ -14,7 +14,7 @@ date: 2019-09-27
 
 Data and code used in our study ‘Early high rates and disparity in the evolution of fish-shaped reptiles’, published as
 
-    Moon BC & Stubbs TL Early high rates and disparity in the evolution of fish-shaped reptiles. <Journal> doi:
+> Moon BC & Stubbs TL Early high rates and disparity in the evolution of fish-shaped reptiles. <Journal> doi:
 
 # Contents #
 
@@ -47,6 +47,11 @@ Data and code used in our study ‘Early high rates and disparity in the evoluti
     │  ├ output/
     │  └ tbl/
     └ supp_BayesTraits/
+       ├ ichthyosaur_data_BAYESTRAITS.csv
+       ├ Moon_Plot_Functions.R
+       ├ traitgram.code.R
+       ├ BayesTraits/
+       └ PostProc/
 
 # Running the code #
 
@@ -74,4 +79,4 @@ Individual command scripts and associated trees for 100 runs are included as `.c
 
     > BayesTraits BayesTraits/ichthyosaur.pca.scores.pruned.singletree.1.nex ichthyosaur_data_BAYESTRAITS.csv < BayesTraits/BayesTraits_hetRates_Script.1.cmd
 
-Homogeneous and heterogeneous scripts are separated as `homRates` or `hetRates`. Results tables are included in the folder `supp_BayesTraits/PostProc`.
+Homogeneous and heterogeneous scripts are separated as `homRates` or `hetRates`. Results tables are included in the folder `supp_BayesTraits/PostProc`. Additional plot are created using the scripts `traitgram.code.R` and `Moon_plot_Funtions.R`.
