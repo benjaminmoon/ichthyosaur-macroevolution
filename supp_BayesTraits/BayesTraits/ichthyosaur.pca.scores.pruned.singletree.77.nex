@@ -1,0 +1,143 @@
+#NEXUS
+[R-package APE, Thu Sep  6 20:38:19 2018]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 65;
+	TAXLABELS
+		Platypterygius_hercynicus
+		Platypterygius_australis
+		Platypterygius_americanus
+		Platypterygius_sachicarum
+		Platypterygius_platydactylus
+		Aegirosaurus_leptospondylus
+		Brachypterygius_extremus
+		Sveltonectes_insolitus
+		Palvennia_hoybergeti
+		Nannopterygius_enthekiodon
+		Caypullisaurus_bonapartei
+		Cryopterygius_kristiansenae
+		Ophthalmosaurus_natans
+		Ophthalmosaurus_icenicus
+		Acamptonectes_densus
+		Stenopterygius_quadriscissus
+		Stenopterygius_uniter
+		Stenopterygius_triscissus
+		Leptonectes_solei
+		Excalibosaurus_costini
+		Eurhinosaurus_longirostris
+		Leptonectes_moorei
+		Leptonectes_tenuirostris
+		Hauffiopteryx_typicus
+		Ichthyosaurus_larkini
+		Ichthyosaurus_somersetensis
+		Ichthyosaurus_breviceps
+		Ichthyosaurus_communis
+		Ichthyosaurus_anningae
+		Ichthyosaurus_conybeari
+		Macgowania_janiceps
+		Temnodontosaurus_eurycephalus
+		Temnodontosaurus_platyodon
+		Temnodontosaurus_trigonodon
+		Suevoleviathan_integer
+		Suevoleviathan_disinteger
+		Temnodontosaurus_azerguensis
+		Chacaicosaurus_cayi
+		Hudsonelpidia_brevirostris
+		Qianichthyosaurus_zhoui
+		Callawayia_neoscapularis
+		Shonisaurus_popularis
+		Guizhouichthyosaurus_wolonggangense
+		Guizhouichthyosaurus_tangae
+		Qianichthyosaurus_xingyiensis
+		Besanosaurus_leptorhynchus
+		Wimanius_odontopalatus
+		Shastasaurus_liangae
+		Shastasaurus_sikkaniensis
+		Cymbospondylus_petrinus
+		Thalattoarchon_saurophagis
+		Contectopalatus_atavus
+		Barracudasauroides_panxianensis
+		Phalarodon_callawayi
+		Mixosaurus_kuhnschneyderi
+		Mixosaurus_cornalianus
+		Phalarodon_fraasi
+		Parvinatator_wapitiensis
+		Gulosaurus_helmi
+		Xinminosaurus_catactes
+		Utatsusaurus_hataii
+		Sclerocormus_parviceps
+		Cartorhynchus_lenticarpus
+		Chaohusaurus_geishanensis
+		Hupehsuchus_nanchangensis
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Platypterygius_hercynicus,
+		2	Platypterygius_australis,
+		3	Platypterygius_americanus,
+		4	Platypterygius_sachicarum,
+		5	Platypterygius_platydactylus,
+		6	Aegirosaurus_leptospondylus,
+		7	Brachypterygius_extremus,
+		8	Sveltonectes_insolitus,
+		9	Palvennia_hoybergeti,
+		10	Nannopterygius_enthekiodon,
+		11	Caypullisaurus_bonapartei,
+		12	Cryopterygius_kristiansenae,
+		13	Ophthalmosaurus_natans,
+		14	Ophthalmosaurus_icenicus,
+		15	Acamptonectes_densus,
+		16	Stenopterygius_quadriscissus,
+		17	Stenopterygius_uniter,
+		18	Stenopterygius_triscissus,
+		19	Leptonectes_solei,
+		20	Excalibosaurus_costini,
+		21	Eurhinosaurus_longirostris,
+		22	Leptonectes_moorei,
+		23	Leptonectes_tenuirostris,
+		24	Hauffiopteryx_typicus,
+		25	Ichthyosaurus_larkini,
+		26	Ichthyosaurus_somersetensis,
+		27	Ichthyosaurus_breviceps,
+		28	Ichthyosaurus_communis,
+		29	Ichthyosaurus_anningae,
+		30	Ichthyosaurus_conybeari,
+		31	Macgowania_janiceps,
+		32	Temnodontosaurus_eurycephalus,
+		33	Temnodontosaurus_platyodon,
+		34	Temnodontosaurus_trigonodon,
+		35	Suevoleviathan_integer,
+		36	Suevoleviathan_disinteger,
+		37	Temnodontosaurus_azerguensis,
+		38	Chacaicosaurus_cayi,
+		39	Hudsonelpidia_brevirostris,
+		40	Qianichthyosaurus_zhoui,
+		41	Callawayia_neoscapularis,
+		42	Shonisaurus_popularis,
+		43	Guizhouichthyosaurus_wolonggangense,
+		44	Guizhouichthyosaurus_tangae,
+		45	Qianichthyosaurus_xingyiensis,
+		46	Besanosaurus_leptorhynchus,
+		47	Wimanius_odontopalatus,
+		48	Shastasaurus_liangae,
+		49	Shastasaurus_sikkaniensis,
+		50	Cymbospondylus_petrinus,
+		51	Thalattoarchon_saurophagis,
+		52	Contectopalatus_atavus,
+		53	Barracudasauroides_panxianensis,
+		54	Phalarodon_callawayi,
+		55	Mixosaurus_kuhnschneyderi,
+		56	Mixosaurus_cornalianus,
+		57	Phalarodon_fraasi,
+		58	Parvinatator_wapitiensis,
+		59	Gulosaurus_helmi,
+		60	Xinminosaurus_catactes,
+		61	Utatsusaurus_hataii,
+		62	Sclerocormus_parviceps,
+		63	Cartorhynchus_lenticarpus,
+		64	Chaohusaurus_geishanensis,
+		65	Hupehsuchus_nanchangensis
+	;
+	TREE * UNTITLED = [&R] (((((((((((((((((((((((((((((((1:42.22585487,2:60.74085394):2.134698904,((3:35.30643319,4:13.65531633):12.294638,5:35.95525854):10.62316937):5.582358454,6:21.24737705):4.601848184,(7:19.46305967,8:41.11593729):5.689476852):3.40683026,(9:10.59208498,10:5.127703523):20.62184884):3.070951569,(11:17.55517519,12:14.93317393):19.61268172):1.197660918,(13:8.178511146,14:7.457165076):14.28487744):1.320000127,15:52.63154443):1.476733076,16:5.232714378):4.284507069,17:9.934281525):3.831199948,18:11.90822507):24.7845828,(((((19:5.984468729,20:2.074907148):0.5534278069,21:19.61743383):0.9614927938,22:14.48664681):3.56768335,23:4.573863921):7.203786436,24:30.84570737):6.276978419):5.119332176,(((((25:12.02718597,26:12.10751448):2.356914692,27:16.44889891):2.471450123,28:18.1589281):2.231742885,29:28.87824868):1.982579648,30:22.50160017):2.036901134):1.937395124,(31:5.611088862,32:26.42237728):1.057482176):1.22298866,(33:13.28263532,34:30.01592806):15.44011099):1.142959407,(35:11.47801853,36:11.47400319):36.31831866):1.123658994,37:49.84821339):2.332880438,38:62.06472999):0.08846561589,39:7.04804208):7.382783799,40:4.029968853):2.788234727,41:21.83243564):2.289907096,42:13.74843738):0.4288385918,(43:8.87829541,44:5.178025813):6.634515185):1.733018806,(((45:5.116470136,46:1.629875351):0.8714597259,47:3.505771704):0.8447975353,(48:6.272797364,49:20.85358005):7.911105989):1.675636158):0.7186745302,(50:4.329391733,51:1.086917335):0.2508334229):0.591013689,(((52:2.671516905,53:1.520562457):0.5202975808,54:4.205017262):0.4785035533,((55:2.655815659,56:2.691231991):2.1501704,57:5.778885834):1.584820908):0.7312024813):0.1161348301,58:0.6861549982):1.083622822,(59:0.3511145089,60:3.646794427):1.59825697):0.01949160331,61:1.783940649):5.719548252,((62:4.218021024,63:4.403653831):1.282925413,64:5.614192237):1.804109956):1.010648526,65:8.370387419);
+END;

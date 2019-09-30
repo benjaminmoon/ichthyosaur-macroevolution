@@ -1,0 +1,109 @@
+Taxon	fad_Ma	lad_Ma	body_length_m	log10(body_length_m)	skull_length_mm	math.log10(skull_length_mm)	orbit_length_mm	math.log10(orbit_length_mm)
+Acamptonectes_densus	132.9	129.4						
+Aegirosaurus_leptospondylus	153.96	149.87	1.77	0.247973266	570	2.755874856	104	2.017033339
+Arthropterygius_chrisorum	163.47	152.06						
+Athabascasaurus_bitumineus	113	111.5	3.5	0.544068044			225	2.352182518
+Barracudasauroides_panxianensis	244.94	243.99			212	2.326335861	40	1.602059991
+Besanosaurus_leptorhynchus	242.1	241.5	5.5	0.740362689	510	2.707570176	75	1.875061263
+Brachypterygius_alekseevi	149.6	147.9						
+Brachypterygius_extremus	151	150					148	2.170261715
+Brachypterygius_pseudoscythica	150.1	149.5						
+Californosaurus_perrini	233.5	228.35						
+Callawayia_neoscapularis	221.5	217.5			453	2.656098202	90	1.954242509
+Cartorhynchus_lenticarpus	247.9	247.71	0.4	-0.397940009	55	1.740362689	20	1.301029996
+Caypullisaurus_bonapartei	152.1	139.4			1300	3.113943352	255	2.40654018
+Chacaicosaurus_cayi	170.3	169.45			980	2.991226076	130	2.113943352
+Chaotusaurus_chaoxianensis	248.09	247.71	1	0	117	2.068185862	30	1.477121255
+Chaohusaurus_geishanensis	248.09	247.71						
+Chaohusaurus_zhangjiawanensis	247.9	247.1						
+Contectopalatus_atavus	244.94	241.5			130	2.113943352	34	1.531478917
+Cryopterygius_kristiansenae	148.3	147.4	5.5	0.740362689	1220	3.086359831	270	2.431363764
+Cymbospondylus_buchseri	242.57	240.3	5.5	0.740362689			158	2.198657087
+Cymbospondylus_nichollsi	243.99	243.05					200	2.301029996
+Cymbospondylus_petrinus	243.99	241.5	9.5	0.977723605	1166	3.06669855	198	2.29666519
+Cymbospondylus_piscosus	247.1	241.5						
+Dearcmhara_shawcrossi	174.43	169.45						
+Eurhinosaurus_longirostris	182.7	180.81	5.07	0.705007959	1250	3.096910013	180	2.255272505
+Excalibosaurus_costini	199.3	197.8			1540	3.187520721		
+Grippia_longirostris	247.9	247.71					43	1.633468456
+Guizhouichthyosaurus_tangae	233.5	228.35	6	0.77815125	800	2.903089987	175	2.243038049
+Guizhouichthyosaurus_wolonggangense	233.5	228.35			645	2.809559715	122	2.086359831
+Gulosaurus_helmi	247.7	247.1			87	1.939519253		
+Hauffiopteryx_typicus	182.7	181.25	1.7	0.230448921	380	2.579783597	116	2.064457989
+Himalayasaurus_tibetensis	228.4	209.5						
+Hudsonelpidia_brevirostris	226.5	221.25			131	2.117271296	47	1.672097858
+Hupehsuchus_nanchangensis	247.9	247.71	0.74	-0.13076828	126	2.100370545		
+Ichthyosaurus_acutirostris	180.36	175.6						
+Ichthyosaurus_anningae	195.31	189.35					72.5	1.860338007
+Ichthyosaurus_breviceps	200.1	196.31	1.5	0.176091259	240	2.380211242	77.5	1.889301703
+Ichthyosaurus_communis	201.3	196.31	1.5	0.176091259	256	2.408239965	67.5	1.829303773
+Ichthyosaurus_conybeari	200.1	196.31	0.87	-0.060480747	216	2.334453751	52	1.716003344
+Isfjordosaurus_minor	247.7	247.1						
+Janusaurus_lundi	148.3	147.4	4	0.602059991			220	2.342422681
+Leninia_stellans	126.3	123					265	2.423245874
+Leptonectes_moorei	190.82	187.56			328	2.515873844	107.2	2.030194785
+Leptonectes_solei	197.8	193.81	8	0.903089987	1585	3.200029267	240	2.380211242
+Leptonectes_tenuirostris	201.3	184.2			523	2.718501689	114	2.056904851
+Macgowania_janiceps	220	216.9					150	2.176091259
+Maiaspondylus_lindoei	111.27	110.22						
+Malawania_anachronus	131	125						
+Mikadocephalus_gracilirostris	242.57	240.3						
+Mixosaurus_cornalianus	242.57	240.3	0.9	-0.045757491	195	2.290034611	45	1.653212514
+Mixosaurus_kuhnschneyderi	242.57	240.3						
+Mixosaurus_xindianensis	244.94	241.5	1	0	223	2.348304863	44.5	1.648360011
+Mollesaurus_periallus	170.3	169.45					376	2.575187845
+Nannopterygius_enthekiodon	154.6	149.87					130	2.113943352
+Ophthalmosaurus_icenicus	165.59	161.39	4.12	0.614897216	965	2.984527313	255	2.40654018
+Ophthalmosaurus_natans	163.5	157.3			1082	3.034227261	234	2.369215857
+Ophthalmosaurus_yasykovi	149.6	146.9					120	2.079181246
+Palvennia_hoybergeti	148.3	147.4			860	2.934498451	290	2.462397998
+Paraophthalmosaurus_kabanovi	147.9	146.9						
+Paraophthalmosaurus_sevaljeviensis	149.6	146.9						
+Parvinatator_wapitiensis	247.9	247.71					25	1.397940009
+Pervushovisaurus_bannovkensis	96.24	95.47						
+Pessopteryx_nisseri	247.7	247.1						
+Phalarodon_callawayi	243.99	239.1	1.5	0.176091259	300	2.477121255	65.5	1.8162413
+Phalarodon_fraasi	244.94	237						
+Phalarodon_major	244.94	237						
+Phantomosaurus_neubigi	243.99	241.5			550	2.740362689		
+Platypterygius_americanus	107.59	100.5			1250	3.096910013	150	2.176091259
+Platypterygius_australis	113	100.5	5.6	0.748188027	1430	3.155336037	230	2.361727836
+Platypterygius_bedengensis	133.88	132			1400	3.146128036	220	2.342422681
+Platypterygius_campylodon	113	93.9						
+Platypterygius_hauthali	130.77	129.41						
+Platypterygius_hercynicus	125	113	4.65	0.667452953	1040	3.017033339		
+Platypterygius_ochevi	113	93.9	3.6	0.556302501				
+Platypterygius_platydactylus	125.71	123.88	5	0.698970004	1170	3.068185862		
+Platypterygius_sachicarum	130.77	113			870	2.939519253	143	2.155336037
+Qianichthyosaurus_xingyiensis	237	228.35	1.3	0.113943352	250	2.397940009	62	1.792391689
+Qianichthyosaurus_zhoui	237	228.35	1.21	0.08278537	240	2.380211242	83	1.919078092
+Quasianosteosaurus_vikinghoegdai	247.7	247.1						
+Shastasaurus_alexandrae	233.5	228.35					130	2.113943352
+Shastasaurus_liangae	233.5	228.35	6.44	0.808885867	750	2.875061263		
+Shastasaurus_pacificus	233.5	228.35						
+Shastasaurus_sikkaniensis	216.9	214.7	21	1.322219295	3000	3.477121255		
+Shonisaurus_popularis	233.5	228.35	13.7	1.136720567	2750	3.439332694	300	2.477121255
+Simbirskiasaurus_birjukovi	130.77	129.41						
+Sisteronia_seeleyi	100.5	96.24						
+Stenopterygius_aaleniensis	174.15	172.13					118	2.071882007
+Stenopterygius_quadriscissus	182.7	180.81	2.69	0.42975228	625	2.795880017	114	2.056904851
+Stenopterygius_triscissus	182.7	180.81	2.39	0.378397901	634	2.802089258	107	2.029383778
+Stenopterygius_uniter	181.25	180.81	1.93	0.285557309	537	2.729974286	107	2.029383778
+Suevoleviathan_disinteger	181.7	180.36	4.31	0.63447727	860	2.934498451	170	2.230448921
+Suevoleviathan_integer	181.7	180.36	3.05	0.484299839				
+Sveltonectes_insolitus	129.6	126.3					130	2.113943352
+Temnodontosaurus_azerguensis	180.36	178.24						
+Temnodontosaurus_eurycephalus	199.3	197.8			1020	3.008600172	200	2.301029996
+Temnodontosaurus_nuertingensis	190.8	187.56	1.28	0.10720997				
+Temnodontosaurus_platyodon	200.1	196.31	6.38	0.804820679	1790	3.252853031	237	2.374748346
+Temnodontosaurus_trigonodon	182.7	180.36	5.17	0.713490543	1090	3.037426498	150	2.176091259
+Thaisaurus_chonglakmanii	250.01	247.1						
+Thalattoarchon_saurophagis	247.1	244.6	8.6	0.934498451	1200	3.079181246	308	2.488550717
+Tholodus_schmidi	241	237						
+Toretocnemus_californicus	233.5	228.35						
+Toretocnemus_zitteli	233.5	228.35						
+Undorosaurus_gorodischensis	147.9	146.9						
+Undorosaurus_trautscholdi	147.9	146.6						
+Utatsusaurus_hataii	247.9	247.71	3	0.477121255	215	2.33243846		
+Wimanius_odontopalatus	241.5	237						
+Xinminosaurus_catactes	244.94	241.5	2.32	0.365487985	290	2.462397998		
