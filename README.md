@@ -14,9 +14,9 @@ date: 2019-09-27
 
 # ichthyosaur-macroevolution #
 
-Data and code used in our study ‘Early high rates and disparity in the evolution of fish-shaped reptiles’, published as
+Data and code used in our study ‘Early high rates and disparity in the evolution of fish-shaped reptiles’, submitted as
 
-> Moon BC & Stubbs TL Early high rates and disparity in the evolution of fish-shaped reptiles. <Journal> doi:
+> Moon BC & Stubbs TL Early high rates and disparity in the evolution of fish-shaped reptiles.
 
 # Contents #
 
