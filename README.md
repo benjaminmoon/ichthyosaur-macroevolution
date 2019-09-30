@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/211271780.svg)](https://zenodo.org/badge/latestdoi/211271780)
+
 ---
 title: Early high rates and disparity in the evolution of fish-shaped reptiles
 author:
