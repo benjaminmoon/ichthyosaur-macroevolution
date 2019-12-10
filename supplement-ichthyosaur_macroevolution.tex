@@ -2,16 +2,16 @@
 
 \documentclass[british,a4paper]{article}
 
-% \usepackage[osf,proportional]{sourceserifpro}
-\usepackage{fontspec}
-\defaultfontfeatures{Ligatures = TeX}
-\setmainfont{Source Serif Pro}[Numbers = {Lowercase,Proportional}]
-\setmonofont{Source Code Pro}[Scale = MatchLowercase]
+\usepackage[osf]{sourceserifpro}
+\usepackage[osf]{sourcesanspro}
+\usepackage[osf]{sourcecodepro}
+% \usepackage{fontspec}
+\defaultfontfeatures{Ligatures = TeX, Scale = MatchLowercase}
 \newcommand{\textallsc}[1]%
   {{\addfontfeatures{Letters = {SmallCaps, UppercaseSmallCaps}}#1}}
 \usepackage{microtype}
 \newfontfamily\tableroman{Source Serif Pro}%
-    [Scale=MatchLowercase, Numbers={Monospaced,OldStyle}]
+    [Numbers={Monospaced,OldStyle}]
 
 \usepackage{mVersion}
     \increaseBuild
