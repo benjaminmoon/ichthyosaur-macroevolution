@@ -13,7 +13,7 @@ library(vegan)
 #   - t_test
 
 pairwise_adonis <- function (x, factors, sim_method = "euclidean",
-                             p_adjust_m = "fdr", perm = 10000) {
+                             p_adjust_m = "fdr", perm = 9999) {
   # script created by Pedro Arbizu; downloaded from
   # https://www.researchgate.net/post/How_can_I_do_PerMANOVA_pairwise_contrasts_in_R
   #
@@ -124,7 +124,7 @@ pairwise_ttest <- function (dat, p_adjust_m = "fdr") {
 }
 
 perbinReplicates <- function (pco, binning, metric = sum_var,
-                              replicates = 10000, ci = 95, cluster = clus) {
+                              replicates = 500, ci = 95, cluster = clus) {
   # Per-bin bootstrap replicates for several measures of disparity on PC
   # matrices or data.frames. A single PC matrix/data.frame and list of taxon-bin
   # occurrences must be provided. The function subsets taxa into their

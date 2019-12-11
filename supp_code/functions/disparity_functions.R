@@ -37,19 +37,19 @@ bootstrapMPD <- function(dissim) {
   mean <- mean(dissim, na.rm = TRUE)
   Z <- length(dissim[complete.cases(dissim)])
   boot_mean <- vector()
-  for (i in 1:10000) {
+  for (i in 1:500) {
     boot_mean[i] <- mean(dissim[complete.cases(dissim)][sample.int(Z, Z, replace = TRUE)])
   }
-  #Lower 0.05 for the mean
-  lower <- sort(boot_mean)[length(boot_mean) * 0.05]
-  #Upper 0.95 for the mean
-  upper <- sort(boot_mean)[length(boot_mean) * 0.95]
+  #Lower 0.025 for the mean
+  lower <- sort(boot_mean)[length(boot_mean) * 0.025]
+  #Upper 0.975 for the mean
+  upper <- sort(boot_mean)[length(boot_mean) * 0.975]
   return(cbind(mean, lower, upper))
 }
 
 bootstrapWMPD <- function(dissim, compars) {
   # Computes the mean pairwise distances between values in a symmetrical dissimilarity matrix weighted
-  # by the proportion of comparable characters. Also bootstraps 10 000 times to get 95% confidence intervals.
+  # by the proportion of comparable characters. Also bootstraps 500 times to get 95% confidence intervals.
   #
   # Args:
   #   dissim: a symmetrical dissimilarity matrix
@@ -63,16 +63,16 @@ bootstrapWMPD <- function(dissim, compars) {
   weighted_mean <- sum(dissim * compars, na.rm = TRUE) / sum(compars, na.rm = TRUE)
   Z <- length(dissim[complete.cases(dissim)])
   boot_mean <- vector()
-  for (i in 1:10000) {
+  for (i in 1:500) {
     temp_dat <- dat[complete.cases(dissim), ][sample.int(Z, Z,
       replace = TRUE), ]
     boot_mean[i] <- sum(temp_dat$dissim * temp_dat$compars,
       na.rm = TRUE) / sum(temp_dat$compars, na.rm = TRUE)
   }
-  #Lower 0.05 for the mean
-  lower <- sort(boot_mean)[length(boot_mean) * 0.05]
-  #Upper 0.95 for the mean
-  upper <- sort(boot_mean)[length(boot_mean) * 0.95]
+  #Lower 0.025 for the mean
+  lower <- sort(boot_mean)[length(boot_mean) * 0.025]
+  #Upper 0.975 for the mean
+  upper <- sort(boot_mean)[length(boot_mean) * 0.975]
   return(cbind(weighted_mean, lower, upper))
 }
 
@@ -80,12 +80,14 @@ doPD <- function (binning, dissim, compars) {
   # Performs MPD and WMPD functions on binned occurrence data and outputs a data frame.
   #
   # Args:
-  #   binning: a list of bins with taxon assignments matching row and column names in `dissim` and `compars`
+  #   binning: a list of bins with taxon assignments matching row and column
+  #            names in `dissim` and `compars`
   #   dissim: a symmetrical dissimilarity matrix
   #   compars: a symmetrical matrix of comparable characters
   #
   # Returns:
-  #   A list of two elements each with data frames of mean pairwise distances and weighted mean pairwise distances
+  #   A list of two elements each with data frames of mean pairwise distances
+  #   and weighted mean pairwise distances
   #   respectively for each bin, and confidence intervals.
   # pairwise distances
   mpd <- list()
@@ -174,7 +176,7 @@ subsetBootstrap <- function (mat, binning) {
   # subsetting and bootstrapping
   boot <- custom.subsets(mat,
                          group = binning) %>%
-          boot.matrix(bootstraps = 1000,
+          boot.matrix(bootstraps = 500,
                       rarefaction = TRUE)
 
   # return data

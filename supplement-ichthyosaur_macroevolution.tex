@@ -21,7 +21,8 @@
 \usepackage{babel}
 
 \usepackage{geometry}
-\usepackage{graphicx} 
+\usepackage{graphicx}
+\usepackage{caption}
 \usepackage[export]{adjustbox}
 \usepackage{rotating}
 \usepackage{placeins}
@@ -67,7 +68,11 @@
             date  = year,
             isbn  = false,
             url   = false]{biblatex}
+\usepackage{jabbrv}
+    \DeclareFieldInputHandler{journaltitle}%
+        {\def\NewValue{\JournalTitle{#1}}}
 \addbibresource{zotero.bib}
+% \addbibresource{supplement-ichthyosaur_macroevolution_biber.bib}
 \AtEveryBibitem{\clearfield{note}}
 
 \usepackage{hyperref}
@@ -245,9 +250,7 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
 
 \listoffigures
 
-\begin{figure}[h]
-    % \includegraphics[width = \textheight, center]{supp_figures/figS3-pairwise_all}
-    \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes though
+\captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes though
     the Mesozoic]{(following page) \textbf{Per-bin discrete skeletal disparity
     of Ichthyosauriformes though the Mesozoic.} Pairwise and weighted
     pairwise dissimilarity measured from raw Euclidean (RAW), generalised
@@ -258,14 +261,9 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     completeness and comparability in each bin. Mean values and 95\%
     confidence intervals are shown from 10,000 bootstrap
     replicates.\label{fig:pairwise-disparity}}
-\end{figure}
-\FloatBarrier
-
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS3-pairwise_all.pdf}
-% \FloatBarrier
 
-\begin{figure}[h]
-    \caption[Per-bin discrete skeletal disparity of Ichthyosauriformes through
+\captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes through
     the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete
     skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated
     data.} Ichthyosaur disparity represented by mean sum of variances, mean sum
@@ -273,38 +271,24 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue correction)
     on the cladistic matrix of \textcite{Moon2018JSP}. Error bars show 95\% confidence
     intervals from 10,000 bootstrap replicates.\label{fig:ordinated-disparity}}
-\end{figure}
-\FloatBarrier
-
 \includepdf[pages=-, fitpaper = true]{supp_figures/figS5-disparity_time.pdf}
-% \FloatBarrier
 
-\begin{figure}[h]
-    \caption[Per-bin rarefaction curves for each disparity-time curve shown in
+\captionof{figure}[Per-bin rarefaction curves for each disparity-time curve shown in
     \cref{fig:ordinated-disparity}]{(following pages) \textbf{Per-bin
     rarefaction curves for each disparity-time curve shown in
     \cref{fig:ordinated-disparity}} Disparity for each bin is sequentially
     rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from
     10,000 bootstrap replicates.\label{fig:rarefaction-curves}}
-\end{figure}
-\FloatBarrier
-
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS6-rarefaction_curves.pdf}
-\FloatBarrier
 
-\begin{figure}[h]
-    \caption[Morphospace occupation of Ichthyosauriformes through the
+\captionof{figure}[Morphospace occupation of Ichthyosauriformes through the
     Mesozoic]{(following pages) \textbf{Morphospace occupation of
     Ichthyosauriformes through the Mesozoic.} Principal coordinate axis 1
     against axes 2 (top row) and 3 (bottom row) from each of eight PCA (four
     distance matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue
     correction) on the cladistic matrix of \textcite{Moon2018JSP} binned into
     epochs.\label{fig:morphospace-plots}}
-\end{figure}
-\FloatBarrier
-
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS7-all_morphospace.pdf}
-
 
 \begin{figure}[h]
     \includegraphics[width = \textwidth, center]{supp_figures/figS8-rates_MBLspaghetti}
@@ -316,15 +300,11 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     10-million-year bins.\label{fig:mbl-discrete-rates}}
 \end{figure}
  
-\begin{figure}[h]
-    \caption[Rates of skull size evolution in Ichthyosauriformes]{(previous
+\captionof{figure}[Rates of skull size evolution in Ichthyosauriformes]{(previous
     page) \textbf{Rates of skull size evolution in Ichthyosauriformes.}
     Evolutionary rate results from 100 Hedman-dated phylogenies. Branches are scaled
     and branches and taxon names coloured to the rate of skull size change on that
     branch.} 
-\end{figure} 
-\FloatBarrier
-
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS10-bayestraits_trees_rates.pdf}
 
 \restoregeometry

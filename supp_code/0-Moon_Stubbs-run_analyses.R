@@ -1,6 +1,8 @@
 #!/usr/bin/env Rscript
 
-# The R scripts sourced here include the analyses for Moon & Stubbs <Title>, <doi>
+# The R scripts sourced here include the analyses for Moon & Stubbs 'Early high
+# disparity and rates in the evolution of ichthyosaurs', Communications
+# Biology
 
 # Installation of required packages #
 # --------------------------------- #
@@ -24,8 +26,12 @@ if (length(new_packages)) {
 if (!require(phytools)) devtools::install_github("liamrevell/phytools")
 # this code was created before recent changes to the Claddis package (v0.3),
 # therefore we specify an older version to install and run
+if (packageVersion("Claddis") != "0.2") {
+  # Downgrade Claddis to suitable version
+  remove.packages("Claddis")
+}
 if (!require(Claddis)) devtools::install_github("graemetlloyd/Claddis",
-																								ref = "4f7f1bf")
+                                                ref = "4f7f1bf")
 
 # check for directories
 directories <- c("./fig", "./output", "./tbl")
