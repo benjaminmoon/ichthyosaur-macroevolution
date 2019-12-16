@@ -3,7 +3,8 @@
 # 2. Time-scaling trees #
 # ===================== #
 
-# Script from Moon & Stubbs <Title>, <doi>
+# Script from Moon & Stubbs Early high disparity and rates in the evolution of
+# ichthyosaurs, Communications Biology
 
 # required libraries
 library(Claddis)
@@ -28,6 +29,10 @@ registerDoParallel(clus)
 # ---------------- #
 
 # load tree, age, and cladistic data
+# Hedman method does not always complete successfully so to get >100 trees we
+# start by scaling 120
+# NB the file `sample_trees.tre` contains 1000 trees from the posterior
+# distribution of Moon (2018, J Syst Palaeontol)
 trees <- ape::read.tree("data/sample_trees.tre")[1:120]
 nexus_data <- ReadMorphNexus("data/matrix.nex")
 full_ages <- read.table("data/ichthyosaur_occurrences.tsv",
@@ -69,7 +74,7 @@ clusterExport(clus, c("ages"))
 
 # time-scale trees using a MBL of 1 Ma, and minMax observations; 10 trees from
 # each run are returned
-mbl_ttrees <- pblapply(root_trees, cl = clus, function (tree) {
+mbl_ttrees <- pblapply(root_trees[1:100], cl = clus, function (tree) {
                 # do MBL tree scaling
                 tt <- timePaleoPhy(tree,
                                    ages,
@@ -131,6 +136,9 @@ time_uniform <- lapply(root_trees, function (tree) {
                         body    = "Hedman tree-scaling completed successfully. :)")
 }
 
+# reduce to 100 trees
+hedman_ttrees <- hedman_ttrees[1:100]
+
 # save trees and write to files
 saveRDS(hedman_ttrees, file = "output/hedman_ttrees.rds")
 
@@ -145,6 +153,7 @@ write.nexus(hedman_write,
 
 # combine all trees
 time_trees <- c(mbl_ttrees, hedman_ttrees)
+class(time_trees) <- "multiPhylo"
 
 # save time_trees object
 saveRDS(time_trees, file = "output/time_trees.rds")

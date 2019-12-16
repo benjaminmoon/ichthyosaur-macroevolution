@@ -111,13 +111,13 @@ fig_maxPD <- function (metric) {
 
   # plot axis labels
   mtext("Age (Ma)", side = 1, line = 3, outer = TRUE, cex = 1.2, font = 2)
-  mtext("Pairwise dissimilarity",
+  mtext("Pairwise maximum observed rescaled distance",
         side = 2, line = 2, outer = TRUE, cex = 1.2, font = 2)
 
   # add a legend: Tom Stubbs
   disparityLegend("bottomleft",
-                  "Pairwise dissimilarity",
-                  "Weighted pairwise dissimilarity",
+                  "Pairwise maximum observed rescaled distance",
+                  "Weighted pairwise maximum observed rescaled distance",
                   cex = 0.8)
 }
 
@@ -166,16 +166,16 @@ fig_pdAll <- function () {
         outer = TRUE, line = 2, font = 2, side = 3)
   mtext("Age (Ma)", side = 1, line = 3.54, outer = TRUE,
         adj = c(0.5, 0.5), cex = 1)
-  mtext("Pairwise dissimilarity", side = 2, line = 0.5, outer = TRUE,
+  mtext("Pairwise distance", side = 2, line = 0.5, outer = TRUE,
         adj = c(0.5, 0.5), cex = 1)
 
   # legend: Stubbsy
   disparityLegend("bottomleft",
-                  "Pairwise dissimilarity",
-                  "Weighted pairwise dissimilarity")
+                  "Pairwise distance",
+                  "Weighted pairwise distance")
 }
 
-fig_rarefactionCurves <- function () {
+fig_rarefactionCurves <- function (disparity) {
   # Plot rarefaction curves for each bin; new page for each run.
   for (run in disparity) {
     # get disparity data

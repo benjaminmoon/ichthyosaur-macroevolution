@@ -141,8 +141,51 @@ saveRDS(pd_disparity, file = "output/pd_disparity.rds")
   dev.off()
 }
 
+# 1.2.1. PD rarefaction #
+# --------------------- #
 
-# 1.2. PCo analyses #
+pblapply(bin_data, function(scheme) {
+  # length of rarefactions to do
+  n_rar <- seq(2, length(scheme$bin_data[[1]]))
+
+  # taxa sampled
+  rar_tax_samp <- lapply(n_rar, function(n_samp) {
+                        replicate(n = 500,
+                                  sample(bin_data$epochs$bin_data[[1]],
+                                         size = n_samp,
+                                         replace = FALSE))
+                   })
+
+  mpd_rar <- lapply(rar_tax_samp, function(rar) {
+    apply(rar, 2, function(repl) {
+      mean(dist_data[[4]][repl,repl], na.rm = TRUE)
+    }) %>%
+      sort()
+  })
+  wmpd_rar <- lapply(rar_tax_samp, function (rar) {
+    apply(rar, 2, function(repl) {
+      sum(dist_data[[4]][repl, repl] * dist_data[[5]][repl, repl], na.rm = TRUE) /
+        sum(dist_data[[5]][repl, repl], na.rm = TRUE)
+    }) %>%
+      sort()
+  })
+
+  dat <- data.frame(n = n_rar,
+             mpd = sapply(mpd_rar, mean),
+             mpd_lower = sapply(mpd_rar, function(x) x[length(x) * 0.025]),
+             mpd_upper = sapply(mpd_rar, function(x) x[length(x) * 0.975]),
+             wmpd = sapply(wmpd_rar, mean),
+             wmpd_lower = sapply(wmpd_rar, function(x) x[length(x) * 0.025]),
+             wmpd_upper = sapply(wmpd_rar, function(x) x[length(x) * 0.975]))
+
+
+
+      })
+
+
+
+
+# 1.3. PCo analyses #
 # ----------------- #
 
 # trim incomparable taxa from distance matrices
@@ -232,7 +275,7 @@ scree_data <- lapply(pco_data, function (pco) {
 }
 
 
-# 1.3. Morphospace #
+# 1.4. Morphospace #
 # ---------------- #
 
 # use uncorrected PCo from MAX distances (i.e. element 4)
@@ -282,7 +325,7 @@ epoch_pch <- rep(c(15, 16, 17, 18), 2)
 }
 
 
-# 1.4. dispRity analyses #
+# 1.5. dispRity analyses #
 # ---------------------- #
 
 # export packages and variables to cluster for parallelisation
@@ -419,7 +462,7 @@ saveRDS(disparity, file = "output/disparity.rds")
 }
 
 
-# 1.5. Rarefaction curves #
+# 1.6. Rarefaction curves #
 # ----------------------- #
 
 {
