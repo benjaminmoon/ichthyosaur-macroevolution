@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Functions for completing rates analyses.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # Some original scripts/functions from Close _et al._ (2015, _Curr. Biol.,_
 # doi:10.1016/j.cub.2015.06.047). Supplementary information found at

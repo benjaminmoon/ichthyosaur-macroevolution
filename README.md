@@ -1,7 +1,7 @@
 [![DOI](https://zenodo.org/badge/211271780.svg)](https://zenodo.org/badge/latestdoi/211271780)
 
 ---
-title: Early high rates and disparity in the evolution of fish-shaped reptiles
+title: Early high rates and disparity in the evolution of ichthyosaurs 
 author:
 - name: Benjamin C. Moon
   affiliation: University of Bristol
@@ -18,7 +18,7 @@ Data and code used in our study ‘Early high rates and disparity in the
 evolution of fish-shaped reptiles’, accepted as
 
 > Moon BC & Stubbs TL Early high rates and disparity in the evolution of
-fish-shaped reptiles. Communications Biology.
+ichthyosaurs. Communications Biology.
 
 # Contents #
 
@@ -104,4 +104,4 @@ Individual command scripts and associated trees for 100 runs are included as
 Homogeneous and heterogeneous scripts are separated as `homRates` or
 `hetRates`. Results tables are included in the folder
 `supp_BayesTraits/PostProc`. Additional plot are created using the scripts
-`traitgram.code.R` and `Moon_plot_Funtions.R`.
+`traitgram.code.R` and `Moon_plot_Functions.R`.

@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Functions for time-scaling trees.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # Contents
 #   - timeHedman

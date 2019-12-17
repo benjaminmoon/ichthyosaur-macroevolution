@@ -2,7 +2,8 @@
 
 # Functions for script `disparity_stats.R` for performing statistical test on
 # disparity analyses.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 library(vegan)
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Useful plotting functions for time series.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 library(colorspace)
 
