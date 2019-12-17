@@ -108,7 +108,7 @@ of \textcite{Moon2018JSP}. Trees were time-scaled in R \autocite{RCoreTeam2019} 
 function \texttt{timePaleoPhy} in the package paleotree \autocite{Bapst2012MEE}
 with point ages sampled from a uniform distribution between their first and last
 occurrences. Each tree was resampled 10 times to account for the occurrence
-ranges for each taxon (120 tree topologies × 10 samples = 1200 time-scaled trees
+ranges for each taxon (100 tree topologies × 10 samples = 1000 time-scaled trees
 total). These MBL time-scaled trees were then used for a further set of discrete
 character evolutionary rates analyses using function
 \texttt{DiscreteCharacterRate} of R package Claddis \autocite{Lloyd2016BJLS}. The
@@ -146,7 +146,7 @@ From the PCA data we used all the resultant axes to calculate per-bin sum of
 variances, sum of ranges, and centroid distances. These metrics have been used
 extensively in previous analyses \autocite{Wills1998BJLS, Thorne2011PNAS,
 FlannerySutherland2019PRSBBS}, so we considered it pertinent to compare them.
-Binning, bootstrap resampling with 10~000 replicates, and complete rarefaction
+Binning, bootstrap resampling with 500 replicates, and complete rarefaction
 were completed using the functions \texttt{custom.subsets} and
 \texttt{boot.matrix}, and disparity calculations used the function
 \texttt{dispRity}, all from package dispRity \autocite{Guillerme2018MEE} in R.
@@ -169,20 +169,23 @@ disparity than GOW and MAX distance matrices. This is most likely a further
 effect of incompleteness degrading the disparity signal by averaging the
 difference between taxa \autocite{FlannerySutherland2019PRSBBS, Lehmann2019P},
 therefore we prefer the results given by GOW and MAX distance matrices.
+Rarefying the data shows that maximum disparity is reach quickly with minimal
+taxa included, and supports using the full taxon sample for each bin
+\pcref{fig:pd-rarefaction-curves}.
 
 \paragraph{Correlation of ordinated data}\label{par:pco-correlation}
 
 Negative eigenvalue correction notably decreased the variance described by the
-first few principal coordinate axes. The highest correlations between the
-original and ordinated data were found when including all ordinated axes
-\pcref{fig:ordination-correlation}. Without negative eigenvalue correction RAW
-and GED had the highest correlation, whereas GOW and MAX were reduced to
-\textasciitilde{}0.8. With negative eigenvalue correction the pattern of
-correlations with increasing number of axes was more complex: RAW gradually
-increased whereas GED strongly decreased, but both rapidly increased to 1.0 with
-the last axes; GOW and MAX correlations both immediately decreased, increased to
-a peak at \textasciitilde{}axis 60, then rapidly increased again when including
-the last axes.
+first few principal coordinate axes \cref{fig:ordination-correlation}. The
+highest correlations between the original and ordinated data were found when
+including all ordinated axes \pcref{fig:ordination-correlation}. Without
+negative eigenvalue correction RAW and GED had the highest correlation, whereas
+GOW and MAX were reduced to \textasciitilde{}0.8. With negative eigenvalue
+correction the pattern of correlations with increasing number of axes was more
+complex: RAW gradually increased whereas GED strongly decreased, but both
+rapidly increased to 1.0 with the last axes; GOW and MAX correlations both
+immediately decreased, increased to a peak at \textasciitilde{}axis 60, then
+rapidly increased again when including the last axes.
 
 \paragraph{Disparity of ordinated data}\label{par:ordinated-disparity}
 
@@ -259,9 +262,26 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     binned into epochs and equal 10-million-year bins. Also, pairwise number
     of comparable characters between taxa (CHAR) indicating the variation in
     completeness and comparability in each bin. Mean values and 95\%
-    confidence intervals are shown from 10,000 bootstrap
+    confidence intervals are shown from 500 bootstrap
     replicates.\label{fig:pairwise-disparity}}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS3-pairwise_all.pdf}
+
+\captionof{figure}[Per-bin rarefaction curves for each disparity-time curve
+    shown in \cref{fig:pairwise-disparity}]{(following pages) \textbf{Per-bin
+    rarefaction curves for each disparity-time curve shown in
+    \cref{fig:pairwise-disparity}.} Disparity for each pin is sequentiall
+    rarefied on taxon occurrnece. Error polygon gives 95\% confidence interval
+    from 500 replicates.\label{fig:pd-rarefaction-curves}}
+\includepdf[pages = -, fitpaper = true]{supp_figures/figS5-pdrarefaction_curves.pdf}
+
+\captionof{figure}[Cumulative variance described by axes of the ordinated data
+    and the correlation of these axes with the original data
+    set]{\textbf{Cumulative variance described by axes of the ordinated data and
+    the correlation of these axes with the original data.} Axes from principal
+    coordinates analysis of the four distance matrices used here derived from
+    the cladistic data set of
+    \textcite{Moon2018JSP}.\label{fig:ordination-correlation}}
+\includegraphics[width = \textwidth]{supp_figures/figS4-scree_plot.pdf}
 
 \captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes through
     the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete
@@ -270,7 +290,7 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     of ranges, and mean centroid distance from each of eight PCA (four distance
     matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue correction)
     on the cladistic matrix of \textcite{Moon2018JSP}. Error bars show 95\% confidence
-    intervals from 10,000 bootstrap replicates.\label{fig:ordinated-disparity}}
+    intervals from 500 bootstrap replicates.\label{fig:ordinated-disparity}}
 \includepdf[pages=-, fitpaper = true]{supp_figures/figS5-disparity_time.pdf}
 
 \captionof{figure}[Per-bin rarefaction curves for each disparity-time curve shown in
@@ -278,7 +298,7 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     rarefaction curves for each disparity-time curve shown in
     \cref{fig:ordinated-disparity}} Disparity for each bin is sequentially
     rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from
-    10,000 bootstrap replicates.\label{fig:rarefaction-curves}}
+    500 replicates.\label{fig:rarefaction-curves}}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS6-rarefaction_curves.pdf}
 
 \captionof{figure}[Morphospace occupation of Ichthyosauriformes through the
@@ -295,7 +315,7 @@ evolution are reached in the Early Jurassic (epoch bins) or Late Triassic
     \caption[Rates of discrete skeletal character evolution in
     Ichthyosauriformes]{\textbf{Rates of discrete skeletal character evolution in
     Ichthyosauriformes.} Calculated from the matrix of \textcite{Moon2018JSP} using
-    1200 time-scaled trees from the minimum branch length method. Rates of evolution
+    1000 time-scaled trees from the minimum branch length method. Rates of evolution
     are plotted in \textbf{a}, epoch-bins and \textbf{b}, equal-length
     10-million-year bins.\label{fig:mbl-discrete-rates}}
 \end{figure}

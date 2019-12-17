@@ -12,6 +12,7 @@ source("functions/plotting_functions.R")
 #   - fig_maxPD
 #   - fig_pdAll
 #   - fig_rarefactionCurves
+#   - fig_pdRarefactionCurves
 #   - fig_scree
 #   - fig_xyMorphospace
 #   - fig_xyMorphospaceAll
@@ -175,7 +176,7 @@ fig_pdAll <- function () {
                   "Weighted pairwise distance")
 }
 
-fig_rarefactionCurves <- function (disparity) {
+fig_rarefactionCurves <- function () {
   # Plot rarefaction curves for each bin; new page for each run.
   for (run in disparity) {
     # get disparity data
@@ -241,6 +242,78 @@ fig_rarefactionCurves <- function (disparity) {
     mtext("Taxon count", side = 1, outer = TRUE, font = 2, line = 1)
     mtext(paste("Mean", plot_names$disp_metrics[[run$metric]]$name),
           side = 2, outer = TRUE, font = 2, line = 2)
+  }
+}
+
+fig_pdRarefactionCurves <- function () {
+  # Plot rarefaction curves for each bin; new page for each run
+  for (run in pd_rare) {
+    # get disparity data
+    pd_dat <- run$rare
+
+    # get length of longest bin
+    xmax <- max(sapply(pd_dat, nrow))
+
+    # get number of bins
+    nbin <- 1
+
+    # prepare plot
+    par(mfrow = c(ceiling(length(pd_dat) / 3), 3))
+
+    # plot per level (bin)
+    for (level in pd_dat) {
+      # get y-axis range
+      yl <- range(level[, c("pd_low", "pd_upp")])
+      # where no taxa  present
+      if (is.na(yl[1])) {
+        yl <- range(0, 1)
+      }
+      # plot count against disparity
+      plot(level$n,
+           level$pd_mean,
+           type = "n", ann = FALSE,
+           xlim = range(0, xmax),
+           ylim = yl)
+
+      # add confidence interval polygon
+      polygon(c(level$n, rev(level$n)),
+              c(level$pd_low, rev(level$pd_upp)),
+              border = NA,
+              col = "grey70")
+
+      # plot mean disparity points
+      points(level$n,
+             level$pd_mean,
+             pch = 19, type = "o")
+
+      # text "n="
+      text(par()$usr[2], par()$usr[4],
+           paste("n =", max(level$n)),
+           adj = c(1.2, 1.2))
+
+      # plot title; if epoch bins give epoch name
+      if (names(run$bins) == "epochs") {
+        title(main = plot_names$epoch_names[nbin],
+              line = 0.5)
+      } else {
+        title(main = names(pd_dat[nbin]), line = 0.5)
+      }
+
+      # add to bin number for naming
+      nbin <- nbin + 1
+    }
+
+    # add titles
+    mtext(paste("Rarefaction curves: mean",
+                plot_names$disp_metrics[[run$disp]],
+                "of",
+                run$dist,
+                "distance matrix in",
+                run$bins,
+                "bins"),
+          side = 3, outer = TRUE, font = 2)
+    mtext("Taxon count", side = 1, outer = TRUE, font = 2, line = 1)
+    mtext("Mean pairwise distance", side = 2, outer = TRUE, font = 2, line = 2)
   }
 }
 

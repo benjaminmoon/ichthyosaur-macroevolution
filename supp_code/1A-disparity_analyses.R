@@ -70,7 +70,11 @@ plot_names <- list(dist = c("RAW", "GED", "GOW", "MAX"),
                    corr = c("uncorrected", "Caillez-corrected"),
                    bins = c(epochs   = "epoch-length",
                             tenMa_bJ = "10 Ma"),
-                   disp_metrics = list(sum_var  = list(func = c(sum, variances),
+                   disp_metrics = list(mpd = list(name = "pairwise distances"),
+                                       wpd = list(
+                                         name = "weighted pairwise distances"
+                                       ),
+                                       sum_var  = list(func = c(sum, variances),
                                                        name = "sum of variances"),
                                        sum_rang = list(func = c(sum, ranges),
                                                        name = "sum of ranges"),
@@ -144,45 +148,40 @@ saveRDS(pd_disparity, file = "output/pd_disparity.rds")
 # 1.2.1. PD rarefaction #
 # --------------------- #
 
-pblapply(bin_data, function(scheme) {
-  # length of rarefactions to do
-  n_rar <- seq(2, length(scheme$bin_data[[1]]))
-
-  # taxa sampled
-  rar_tax_samp <- lapply(n_rar, function(n_samp) {
-                        replicate(n = 500,
-                                  sample(bin_data$epochs$bin_data[[1]],
-                                         size = n_samp,
-                                         replace = FALSE))
-                   })
-
-  mpd_rar <- lapply(rar_tax_samp, function(rar) {
-    apply(rar, 2, function(repl) {
-      mean(dist_data[[4]][repl,repl], na.rm = TRUE)
-    }) %>%
-      sort()
+# link matrices and binning schemes
+dist_sep <- lapply(seq_along(dist_data[1:4]), function (mat) {
+  lapply(seq_along(bin_data), function (binning) {
+    list(ddat = dist_data[[mat]],
+         dbin = bin_data[[binning]]$bin_data[
+           bin_data[[binning]]$bin_data != bin_data[[binning]]$bin_data$outgroup
+           ],
+         dist = plot_names$dist[mat],
+         bins = plot_names$bins[binning]
+         )
   })
-  wmpd_rar <- lapply(rar_tax_samp, function (rar) {
-    apply(rar, 2, function(repl) {
-      sum(dist_data[[4]][repl, repl] * dist_data[[5]][repl, repl], na.rm = TRUE) /
-        sum(dist_data[[5]][repl, repl], na.rm = TRUE)
-    }) %>%
-      sort()
-  })
+}) %>%
+  unlist(recursive = FALSE)
 
-  dat <- data.frame(n = n_rar,
-             mpd = sapply(mpd_rar, mean),
-             mpd_lower = sapply(mpd_rar, function(x) x[length(x) * 0.025]),
-             mpd_upper = sapply(mpd_rar, function(x) x[length(x) * 0.975]),
-             wmpd = sapply(wmpd_rar, mean),
-             wmpd_lower = sapply(wmpd_rar, function(x) x[length(x) * 0.025]),
-             wmpd_upper = sapply(wmpd_rar, function(x) x[length(x) * 0.975]))
+# rarefy distance matrices and calculate pairwise distances
+clusterExport(clus, c("pblapply", "rarefyPD", "%>%", "dist_data"))
+pd_rare <- rarefyPD(dist_sep) %>%
+  unlist(recursive = FALSE)
 
-
-
-      })
-
-
+{
+  # plot rarefaction curves
+  cairo_pdf("fig/figS5-pdrarefaction_curves.pdf",
+            width = 10,
+            height = 10,
+            onefile = TRUE)
+  # set-up plot area
+  par(oma = c(3, 4, 2, 1),
+      mar = c(1, 1, 3, 1),
+      mgp = c(1.5, 0.5, 0))
+  # plot figure
+  fig_pdRarefactionCurves()
+  # stop plotting
+  dev.off()
+}
 
 
 # 1.3. PCo analyses #

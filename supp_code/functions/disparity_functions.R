@@ -21,6 +21,7 @@ library(magrittr)
 #   - bootstrapWMPD
 #   - doPD
 #   - pcCorrelation
+#   - rarefyPD
 #   - scree
 #   - subsetBootstrap
 
@@ -134,6 +135,77 @@ pcCorrelation <- function (pco, dist) {
               # return correlation
               return(pc_cor)
             })
+}
+
+rarefyPD <- function (d_dist) {
+  # Rarefied pairwise distances calculations
+  #
+  # Args:
+  #   d_dist: a list of distance data with associated list of binning data under
+  #           ddist and dbin item respectively
+  #
+  # Returns:
+  #   A list of rarefied data frames for each bin and each distacne matrix.
+  # Rarefy data
+  pblapply(d_dist, cl = clus, function (run) {
+    brare <- lapply(run$dbin, function (bin) {
+      # get sequence for rarefaction values
+      if (length(bin) > 1) {
+        nrar <- seq(2, length(bin))
+      } else {
+        nrar <- length (bin)
+      }
+      
+      # rarefy distacne data
+      rare <- pblapply(nrar, function (n_samp) {
+        reps <- lapply(seq_len(500), function (nrep) {
+          # sample taxa
+          tx <- sample(bin, size = n_samp, replace = FALSE)
+  
+          # create reduced matrices from dist_data[[n]]
+          tdat <- run$ddat[tx, tx]
+          cdat <- dist_data[[5]][tx, tx]
+  
+          # calculate pairwise distance metrics
+          mpd <- mean(tdat, na.rm = TRUE)
+          wpd <- sum(tdat * cdat, na.rm = TRUE) / sum(cdat, na.rm = TRUE)
+          
+          # return data frame
+          data.frame(mpd = mpd,
+                     wpd = wpd)
+        }) %>%
+          do.call(rbind, .)
+        
+        # sort values for disparity rarefactions
+        smpd <- sort(reps$mpd)
+        swpd <- sort(reps$wpd)
+  
+        # return data frames of rarefied values and confidence intervals
+        list(mpd = data.frame(n = n_samp,
+                   pd_mean = mean(smpd),
+                   pd_low  = smpd[length(smpd) * 0.025],
+                   pd_upp  = smpd[length(smpd) * 0.975]),
+             wpd = data.frame(n = n_samp,
+                   pd_mean = mean(swpd),
+                   pd_low  = swpd[length(swpd) * 0.025],
+                   pd_upp  = swpd[length(swpd) * 0.975]))
+      })
+      
+      # return lists of values
+      list(mpd = lapply(rare, "[[", "mpd") %>% do.call(rbind, .),
+           wpd = lapply(rare, "[[", "wpd") %>% do.call(rbind, .))
+    })
+    
+    # return lists of values
+    list(list(rare = lapply(brare, "[[", "mpd"),
+              dist = run$dist,
+              bins = run$bins,
+              disp = "mpd"),
+         list(rare = lapply(brare, "[[", "wpd"),
+              dist = run$dist,
+              bins = run$bins,
+              disp = "wpd"))
+  })
 }
 
 scree <- function (mat) {
