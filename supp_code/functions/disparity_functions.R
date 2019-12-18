@@ -164,8 +164,8 @@ rarefyPD <- function (d_dist) {
           tx <- sample(bin, size = n_samp, replace = FALSE)
   
           # create reduced matrices from dist_data[[n]]
-          tdat <- run$ddat[tx, tx]
-          cdat <- dist_data[[5]][tx, tx]
+          tdat <- upperTriangle(run$ddat[tx, tx])
+          cdat <- upperTriangle(dist_data[[5]][tx, tx])
   
           # calculate pairwise distance metrics
           mpd <- mean(tdat, na.rm = TRUE)
