@@ -79,6 +79,9 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
     \newcommand\pcref[1]{(\cref{#1})}
+    \crefname{figure}{Supplementary Figure}{Supplementary Figure}
+    \crefname{table}{Supplementary Table}{Supplementary Table}
+    \crefname{enumi}{Supplementary}{Supplementary}
 
 
 \title{Supplementary material for `Early high rates and disparity in the
@@ -97,61 +100,74 @@ evolution of ichthyosaurs'}
 
 \listoffigures
 
-\captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes though
-    the Mesozoic]{(following page) \textbf{Per-bin discrete skeletal disparity
-    of Ichthyosauriformes though the Mesozoic.} Pairwise and weighted
-    pairwise dissimilarity measured from raw Euclidean (RAW), generalised
-    Euclidean (GED), Gower (GOW), and maximum observed rescaled (MAX)
-    distances between taxa in the cladistic dataset of \textcite{Moon2018JSP}
-    binned into epochs and equal 10-million-year bins. Also, pairwise number
-    of comparable characters between taxa (CHAR) indicating the variation in
-    completeness and comparability in each bin. Mean values and 95\%
-    confidence intervals are shown from 500 bootstrap
-    replicates.\label{fig:pairwise-disparity}}
+\vspace{2em}
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes though
+        the Mesozoic]{(following page) \textbf{Per-bin discrete skeletal disparity
+        of Ichthyosauriformes though the Mesozoic.} Pairwise and weighted
+        pairwise dissimilarity measured from raw Euclidean (RAW), generalised
+        Euclidean (GED), Gower (GOW), and maximum observed rescaled (MAX)
+        distances between taxa in the cladistic dataset of \textcite{Moon2018JSP}
+        binned into epochs and equal 10-million-year bins. Also, pairwise number
+        of comparable characters between taxa (CHAR) indicating the variation in
+        completeness and comparability in each bin. Mean values and 95\%
+        confidence intervals are shown from 500 bootstrap
+        replicates.\label{fig:pairwise-disparity}}
+\end{minipage}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS3-pairwise_all.pdf}
 
-\captionof{figure}[Per-bin rarefaction curves for each disparity-time curve
-    shown in \cref{fig:pairwise-disparity}]{(following pages) \textbf{Per-bin
-    rarefaction curves for each disparity-time curve shown in
-    \cref{fig:pairwise-disparity}.} Disparity for each pin is sequentiall
-    rarefied on taxon occurrnece. Error polygon gives 95\% confidence interval
-    from 500 replicates.\label{fig:pd-rarefaction-curves}}
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Per-bin rarefaction curves for each disparity-time curve
+        shown in \cref{fig:pairwise-disparity}]{(following pages) \textbf{Per-bin
+        rarefaction curves for each disparity-time curve shown in
+        \cref{fig:pairwise-disparity}.} Disparity for each pin is sequentiall
+        rarefied on taxon occurrnece. Error polygon gives 95\% confidence interval
+        from 500 replicates.\label{fig:pd-rarefaction-curves}}
+\end{minipage}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS5-pdrarefaction_curves.pdf}
 
-\captionof{figure}[Cumulative variance described by axes of the ordinated data
-    and the correlation of these axes with the original data
-    set]{\textbf{Cumulative variance described by axes of the ordinated data and
-    the correlation of these axes with the original data.} Axes from principal
-    coordinates analysis of the four distance matrices used here derived from
-    the cladistic data set of
-    \textcite{Moon2018JSP}.\label{fig:ordination-correlation}}
-\includegraphics[width = \textwidth]{supp_figures/figS4-scree_plot.pdf}
+\begin{figure}[h]
+    \caption[Cumulative variance described by axes of the ordinated data
+        and the correlation of these axes with the original data
+        set]{\textbf{Cumulative variance described by axes of the ordinated data and
+        the correlation of these axes with the original data.} Axes from principal
+        coordinates analysis of the four distance matrices used here derived from
+        the cladistic data set of
+        \textcite{Moon2018JSP}.\label{fig:ordination-correlation}}
+    \includegraphics[width = \textwidth]{supp_figures/figS4-scree_plot.pdf}
+\end{figure}
 
-\captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes through
-    the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete
-    skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated
-    data.} Ichthyosaur disparity represented by mean sum of variances, mean sum
-    of ranges, and mean centroid distance from each of eight PCA (four distance
-    matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue correction)
-    on the cladistic matrix of \textcite{Moon2018JSP}. Error bars show 95\% confidence
-    intervals from 500 bootstrap replicates.\label{fig:ordinated-disparity}}
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Per-bin discrete skeletal disparity of Ichthyosauriformes through
+        the Mesozoic from ordinated data]{(following pages) \textbf{Per-bin discrete
+        skeletal disparity of Ichthyosauriformes through the Mesozoic from ordinated
+        data.} Ichthyosaur disparity represented by mean sum of variances, mean sum
+        of ranges, and mean centroid distance from each of eight PCA (four distance
+        matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue correction)
+        on the cladistic matrix of \textcite{Moon2018JSP}. Error bars show 95\% confidence
+        intervals from 500 bootstrap replicates.\label{fig:ordinated-disparity}}
+\end{minipage}
 \includepdf[pages=-, fitpaper = true]{supp_figures/figS5-disparity_time.pdf}
 
-\captionof{figure}[Per-bin rarefaction curves for each disparity-time curve shown in
-    \cref{fig:ordinated-disparity}]{(following pages) \textbf{Per-bin
-    rarefaction curves for each disparity-time curve shown in
-    \cref{fig:ordinated-disparity}} Disparity for each bin is sequentially
-    rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from
-    500 replicates.\label{fig:rarefaction-curves}}
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Per-bin rarefaction curves for each disparity-time curve shown in
+        \cref{fig:ordinated-disparity}]{(following pages) \textbf{Per-bin
+        rarefaction curves for each disparity-time curve shown in
+        \cref{fig:ordinated-disparity}} Disparity for each bin is sequentially
+        rarefied on taxon occurrences. Error polygon gives 95\% confidence interval from
+        500 replicates.\label{fig:rarefaction-curves}}
+\end{minipage}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS6-rarefaction_curves.pdf}
 
-\captionof{figure}[Morphospace occupation of Ichthyosauriformes through the
-    Mesozoic]{(following pages) \textbf{Morphospace occupation of
-    Ichthyosauriformes through the Mesozoic.} Principal coordinate axis 1
-    against axes 2 (top row) and 3 (bottom row) from each of eight PCA (four
-    distance matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue
-    correction) on the cladistic matrix of \textcite{Moon2018JSP} binned into
-    epochs.\label{fig:morphospace-plots}}
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Morphospace occupation of Ichthyosauriformes through the
+        Mesozoic]{(following pages) \textbf{Morphospace occupation of
+        Ichthyosauriformes through the Mesozoic.} Principal coordinate axis 1
+        against axes 2 (top row) and 3 (bottom row) from each of eight PCA (four
+        distance matrices: RAW, GED, GOW, MAX\@; with and without negative eigenvalue
+        correction) on the cladistic matrix of \textcite{Moon2018JSP} binned into
+        epochs.\label{fig:morphospace-plots}}
+\end{minipage}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS7-all_morphospace.pdf}
 
 \begin{figure}[h]
@@ -163,12 +179,14 @@ evolution of ichthyosaurs'}
     are plotted in \textbf{a}, epoch-bins and \textbf{b}, equal-length
     10-million-year bins.\label{fig:mbl-discrete-rates}}
 \end{figure}
- 
-\captionof{figure}[Rates of skull size evolution in Ichthyosauriformes]{(previous
-    page) \textbf{Rates of skull size evolution in Ichthyosauriformes.}
-    Evolutionary rate results from 100 Hedman-dated phylogenies. Branches are scaled
-    and branches and taxon names coloured to the rate of skull size change on that
-    branch.} 
+
+\noindent\begin{minipage}[c]{\textwidth}
+    \captionof{figure}[Rates of skull size evolution in
+        Ichthyosauriformes]{(following page) \textbf{Rates of skull size
+        evolution in Ichthyosauriformes.} Evolutionary rate results from 100
+        Hedman-dated phylogenies. Branches are scaled and branches and taxon
+        names coloured to the rate of skull size change on that branch.} 
+\end{minipage}
 \includepdf[pages = -, fitpaper = true]{supp_figures/figS10-bayestraits_trees_rates.pdf}
 
 \restoregeometry
@@ -280,7 +298,7 @@ character evolutionary rates analyses using function
 \texttt{DiscreteCharacterRate} of R package Claddis \autocite{Lloyd2016BJLS}. The
 results of this were used to produce `spaghetti' plots for epoch-length bins and
 equal-length bins using modified scripts from \textcite{Close2015CB}. Code for
-all these analyses is included in Supplementary~\cref{disparity-discrete-code}.
+all these analyses is included in \cref{disparity-discrete-code}.
 
 \paragraph{Additional disparity metrics}
 
@@ -316,7 +334,7 @@ Binning, bootstrap resampling with 500 replicates, and complete rarefaction
 were completed using the functions \texttt{custom.subsets} and
 \texttt{boot.matrix}, and disparity calculations used the function
 \texttt{dispRity}, all from package dispRity \autocite{Guillerme2018MEE} in R.
-Code for this is included in Supplementary~\cref{disparity-discrete-code}.
+Code for this is included in \cref{disparity-discrete-code}.
 
 
 \section{Supplementary results}\label{sec:supplemental-results}
