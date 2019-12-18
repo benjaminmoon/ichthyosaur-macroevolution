@@ -3,7 +3,8 @@
 # Send an email notification when jobs are done.
 # Uses mailR to send, and keyringr to decrypt password. Instructions on how to
 # use keyringr are found at <https://bit.ly/2AHUj0A>.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 library(keyringr)
 library(mailR)

@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Scripts for computing disparity.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # Original pairwise distances functions from Close _et al._ (2015, _Curr. Biol.,_
 # doi:10.1016/j.cub.2015.06.047). Supplementary information found at
@@ -21,6 +22,7 @@ library(magrittr)
 #   - bootstrapWMPD
 #   - doPD
 #   - pcCorrelation
+#   - rarefyPD
 #   - scree
 #   - subsetBootstrap
 
@@ -37,19 +39,19 @@ bootstrapMPD <- function(dissim) {
   mean <- mean(dissim, na.rm = TRUE)
   Z <- length(dissim[complete.cases(dissim)])
   boot_mean <- vector()
-  for (i in 1:10000) {
+  for (i in 1:500) {
     boot_mean[i] <- mean(dissim[complete.cases(dissim)][sample.int(Z, Z, replace = TRUE)])
   }
-  #Lower 0.05 for the mean
-  lower <- sort(boot_mean)[length(boot_mean) * 0.05]
-  #Upper 0.95 for the mean
-  upper <- sort(boot_mean)[length(boot_mean) * 0.95]
+  #Lower 0.025 for the mean
+  lower <- sort(boot_mean)[length(boot_mean) * 0.025]
+  #Upper 0.975 for the mean
+  upper <- sort(boot_mean)[length(boot_mean) * 0.975]
   return(cbind(mean, lower, upper))
 }
 
 bootstrapWMPD <- function(dissim, compars) {
   # Computes the mean pairwise distances between values in a symmetrical dissimilarity matrix weighted
-  # by the proportion of comparable characters. Also bootstraps 10 000 times to get 95% confidence intervals.
+  # by the proportion of comparable characters. Also bootstraps 500 times to get 95% confidence intervals.
   #
   # Args:
   #   dissim: a symmetrical dissimilarity matrix
@@ -63,16 +65,16 @@ bootstrapWMPD <- function(dissim, compars) {
   weighted_mean <- sum(dissim * compars, na.rm = TRUE) / sum(compars, na.rm = TRUE)
   Z <- length(dissim[complete.cases(dissim)])
   boot_mean <- vector()
-  for (i in 1:10000) {
+  for (i in 1:500) {
     temp_dat <- dat[complete.cases(dissim), ][sample.int(Z, Z,
       replace = TRUE), ]
     boot_mean[i] <- sum(temp_dat$dissim * temp_dat$compars,
       na.rm = TRUE) / sum(temp_dat$compars, na.rm = TRUE)
   }
-  #Lower 0.05 for the mean
-  lower <- sort(boot_mean)[length(boot_mean) * 0.05]
-  #Upper 0.95 for the mean
-  upper <- sort(boot_mean)[length(boot_mean) * 0.95]
+  #Lower 0.025 for the mean
+  lower <- sort(boot_mean)[length(boot_mean) * 0.025]
+  #Upper 0.975 for the mean
+  upper <- sort(boot_mean)[length(boot_mean) * 0.975]
   return(cbind(weighted_mean, lower, upper))
 }
 
@@ -80,12 +82,14 @@ doPD <- function (binning, dissim, compars) {
   # Performs MPD and WMPD functions on binned occurrence data and outputs a data frame.
   #
   # Args:
-  #   binning: a list of bins with taxon assignments matching row and column names in `dissim` and `compars`
+  #   binning: a list of bins with taxon assignments matching row and column
+  #            names in `dissim` and `compars`
   #   dissim: a symmetrical dissimilarity matrix
   #   compars: a symmetrical matrix of comparable characters
   #
   # Returns:
-  #   A list of two elements each with data frames of mean pairwise distances and weighted mean pairwise distances
+  #   A list of two elements each with data frames of mean pairwise distances
+  #   and weighted mean pairwise distances
   #   respectively for each bin, and confidence intervals.
   # pairwise distances
   mpd <- list()
@@ -134,6 +138,77 @@ pcCorrelation <- function (pco, dist) {
             })
 }
 
+rarefyPD <- function (d_dist) {
+  # Rarefied pairwise distances calculations
+  #
+  # Args:
+  #   d_dist: a list of distance data with associated list of binning data under
+  #           ddist and dbin item respectively
+  #
+  # Returns:
+  #   A list of rarefied data frames for each bin and each distacne matrix.
+  # Rarefy data
+  pblapply(d_dist, cl = clus, function (run) {
+    brare <- lapply(run$dbin, function (bin) {
+      # get sequence for rarefaction values
+      if (length(bin) > 1) {
+        nrar <- seq(2, length(bin))
+      } else {
+        nrar <- length (bin)
+      }
+      
+      # rarefy distacne data
+      rare <- pblapply(nrar, function (n_samp) {
+        reps <- lapply(seq_len(500), function (nrep) {
+          # sample taxa
+          tx <- sample(bin, size = n_samp, replace = FALSE)
+  
+          # create reduced matrices from dist_data[[n]]
+          tdat <- upperTriangle(run$ddat[tx, tx])
+          cdat <- upperTriangle(dist_data[[5]][tx, tx])
+  
+          # calculate pairwise distance metrics
+          mpd <- mean(tdat, na.rm = TRUE)
+          wpd <- sum(tdat * cdat, na.rm = TRUE) / sum(cdat, na.rm = TRUE)
+          
+          # return data frame
+          data.frame(mpd = mpd,
+                     wpd = wpd)
+        }) %>%
+          do.call(rbind, .)
+        
+        # sort values for disparity rarefactions
+        smpd <- sort(reps$mpd)
+        swpd <- sort(reps$wpd)
+  
+        # return data frames of rarefied values and confidence intervals
+        list(mpd = data.frame(n = n_samp,
+                   pd_mean = mean(smpd),
+                   pd_low  = smpd[length(smpd) * 0.025],
+                   pd_upp  = smpd[length(smpd) * 0.975]),
+             wpd = data.frame(n = n_samp,
+                   pd_mean = mean(swpd),
+                   pd_low  = swpd[length(swpd) * 0.025],
+                   pd_upp  = swpd[length(swpd) * 0.975]))
+      })
+      
+      # return lists of values
+      list(mpd = lapply(rare, "[[", "mpd") %>% do.call(rbind, .),
+           wpd = lapply(rare, "[[", "wpd") %>% do.call(rbind, .))
+    })
+    
+    # return lists of values
+    list(list(rare = lapply(brare, "[[", "mpd"),
+              dist = run$dist,
+              bins = run$bins,
+              disp = "mpd"),
+         list(rare = lapply(brare, "[[", "wpd"),
+              dist = run$dist,
+              bins = run$bins,
+              disp = "wpd"))
+  })
+}
+
 scree <- function (mat) {
   # Calculates the variance contribution of each column of a matrix as a
   # percentage of the total, allowing production of a scree plot later on.
@@ -174,7 +249,7 @@ subsetBootstrap <- function (mat, binning) {
   # subsetting and bootstrapping
   boot <- custom.subsets(mat,
                          group = binning) %>%
-          boot.matrix(bootstraps = 1000,
+          boot.matrix(bootstraps = 500,
                       rarefaction = TRUE)
 
   # return data

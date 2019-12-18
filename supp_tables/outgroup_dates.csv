@@ -1,9 +1,9 @@
 Taxon,FAD,LAD,FAStrat,LAStrat,Reference
-Petrolacosaurus,307.0,298.9,Upper Pennsylvanian,Upper Pennsylvanian,\cite{Reisz1981,Falcon-Lang:2007aa}
-Hovasaurus,259.8,251.2,Upper Permian,Induan,\cite{Ketchum:2004aa}
-Claudiosaurus,253.2,252.17,Late Changsinghian,Late Changinghian,\cite{Reisz2011}
-Thadeosaurus,254.14,252.17,Changsinghian,Changsinghian,\cite{Reisz2011}
-Milleretta,253.2,252.5,Changsinghian,Changsinghian,\cite{Ruta:2011aa}
-Broomia,265.1,260.5,Capitanian,Capitanian,\cite{Ruta:2011aa}
-Mesosaurus,290.1,286,Early Artinskian,Early Artinskian,\cite{Ruta:2011aa}
-Captorhinus,280,270.6,Leonardian,Leonardian,\cite{Kissel:2002aa}
+Petrolacosaurus,307.0,298.9,Upper Pennsylvanian,Upper Pennsylvanian,\cite{Reisz1981SPMNHUK,Falcon-Lang2007JGSL}
+Hovasaurus,259.8,251.2,Upper Permian,Induan,\cite{Ketchum2004CJES}
+Claudiosaurus,253.2,252.17,Late Changsinghian,Late Changinghian,\cite{Reisz2011PRSB}
+Thadeosaurus,254.14,252.17,Changsinghian,Changsinghian,\cite{Reisz2011PRSB}
+Milleretta,253.2,252.5,Changsinghian,Changsinghian,\cite{Ruta2011P}
+Broomia,265.1,260.5,Capitanian,Capitanian,\cite{Ruta2011P}
+Mesosaurus,290.1,286,Early Artinskian,Early Artinskian,\cite{Ruta2011P}
+Captorhinus,280,270.6,Leonardian,Leonardian,\cite{Kissel2002CJES}

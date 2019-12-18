@@ -3,7 +3,8 @@
 # This script includes a function to more quickly input RGB colours in a 0–255
 # scale, and a list of RGB colour values for the Mesozoic; periods, epochs, and
 # ages.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # Contents:
 #   - RBG

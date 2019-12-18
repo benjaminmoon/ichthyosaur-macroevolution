@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Useful plotting functions for time series.
-# From Moon & Stubbs <Title>, <doi>
+# From Moon & Stubbs "Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 library(colorspace)
 
@@ -18,7 +19,7 @@ library(colorspace)
 #   - xyLegend
 
 
-diverge_pal <- diverge_hcl(7, h = c(340, 128))[c(2, 7)]
+diverge_pal <- diverging_hcl(7, h = c(80, 265))[c(2, 7)]
 
 base_spaghettiLegend <- function(location = "bottomleft") {
   # Plots a legend for `base_spaghettiPlot` in the bottom left (by default) of
@@ -254,7 +255,7 @@ plotDisparity <- function (binning, datA, datB = NULL, xlim = NULL, two_axes = F
     arrows(plot_x + x_shift, datA[, 2], plot_x + x_shift, datA[, 3],
            length = 0.02, angle = 90, code = 3, col = diverge_pal[1])
     }
-  points(plot_x + x_shift, datA[, 1],
+  points(plot_x + x_shift, datA[, 1], cex = 1.2, lwd = 1.2,
          type = "o", pch = 16, col = diverge_pal[1])
   axis(side = 2)
 
@@ -273,7 +274,7 @@ plotDisparity <- function (binning, datA, datB = NULL, xlim = NULL, two_axes = F
       arrows(plot_x - x_shift, datB[, 2], plot_x - x_shift, datB[, 3],
              length = 0.02, angle = 90, code = 3, col = diverge_pal[2])
     }
-    points(plot_x - x_shift, datB[, 1],
+    points(plot_x - x_shift, datB[, 1], cex = 1.2, lwd = 1.2,
            type = "o", pch = 18, col = diverge_pal[2])
 
   }

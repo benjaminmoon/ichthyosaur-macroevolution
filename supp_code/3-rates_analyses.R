@@ -3,7 +3,8 @@
 # 3. Discrete rates analyses #
 # ========================== #
 
-# Script from Moon & Stubbs <Title>, <doi>
+# Script from Moon & Stubbs Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # required libraries
 library(Claddis)

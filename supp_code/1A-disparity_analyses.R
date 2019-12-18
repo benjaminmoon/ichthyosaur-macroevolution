@@ -3,7 +3,8 @@
 # 1A. Disparity analyses #
 # ====================== #
 
-# Script from Moon & Stubbs <Title>, <doi>
+# Script from Moon & Stubbs Early high rates and disparity in the evolution of
+# ichthyosaurs. Communications Biology 
 
 # required libraries
 library(dispRity)
@@ -70,7 +71,11 @@ plot_names <- list(dist = c("RAW", "GED", "GOW", "MAX"),
                    corr = c("uncorrected", "Caillez-corrected"),
                    bins = c(epochs   = "epoch-length",
                             tenMa_bJ = "10 Ma"),
-                   disp_metrics = list(sum_var  = list(func = c(sum, variances),
+                   disp_metrics = list(mpd = list(name = "pairwise distances"),
+                                       wpd = list(
+                                         name = "weighted pairwise distances"
+                                       ),
+                                       sum_var  = list(func = c(sum, variances),
                                                        name = "sum of variances"),
                                        sum_rang = list(func = c(sum, ranges),
                                                        name = "sum of ranges"),
@@ -141,8 +146,46 @@ saveRDS(pd_disparity, file = "output/pd_disparity.rds")
   dev.off()
 }
 
+# 1.2.1. PD rarefaction #
+# --------------------- #
 
-# 1.2. PCo analyses #
+# link matrices and binning schemes
+dist_sep <- lapply(seq_along(dist_data[1:4]), function (mat) {
+  lapply(seq_along(bin_data), function (binning) {
+    list(ddat = dist_data[[mat]],
+         dbin = bin_data[[binning]]$bin_data[
+           bin_data[[binning]]$bin_data != bin_data[[binning]]$bin_data$outgroup
+           ],
+         dist = plot_names$dist[mat],
+         bins = plot_names$bins[binning]
+         )
+  })
+}) %>%
+  unlist(recursive = FALSE)
+
+# rarefy distance matrices and calculate pairwise distances
+clusterExport(clus, c("pblapply", "rarefyPD", "%>%", "dist_data"))
+pd_rare <- rarefyPD(dist_sep) %>%
+  unlist(recursive = FALSE)
+
+{
+  # plot rarefaction curves
+  cairo_pdf("fig/figS5-pdrarefaction_curves.pdf",
+            width = 10,
+            height = 10,
+            onefile = TRUE)
+  # set-up plot area
+  par(oma = c(3, 4, 2, 1),
+      mar = c(1, 1, 3, 1),
+      mgp = c(1.5, 0.5, 0))
+  # plot figure
+  fig_pdRarefactionCurves()
+  # stop plotting
+  dev.off()
+}
+
+
+# 1.3. PCo analyses #
 # ----------------- #
 
 # trim incomparable taxa from distance matrices
@@ -232,7 +275,7 @@ scree_data <- lapply(pco_data, function (pco) {
 }
 
 
-# 1.3. Morphospace #
+# 1.4. Morphospace #
 # ---------------- #
 
 # use uncorrected PCo from MAX distances (i.e. element 4)
@@ -282,7 +325,7 @@ epoch_pch <- rep(c(15, 16, 17, 18), 2)
 }
 
 
-# 1.4. dispRity analyses #
+# 1.5. dispRity analyses #
 # ---------------------- #
 
 # export packages and variables to cluster for parallelisation
@@ -419,7 +462,7 @@ saveRDS(disparity, file = "output/disparity.rds")
 }
 
 
-# 1.5. Rarefaction curves #
+# 1.6. Rarefaction curves #
 # ----------------------- #
 
 {
