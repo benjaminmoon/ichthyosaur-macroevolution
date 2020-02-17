@@ -10,15 +10,19 @@ author:
   affiliation: University of Bristol
   email:  tom.stubbs@bristol.ac.uk
 date: 2019-12-09
+journal: Communications Biology
+url: https://www.nature.com/articles/s42003-020-0779-6
+doi: https://doi.org/10.1038/s42003-020-0779-6
+date_published: 2020-02-13
 ...
 
 # ichthyosaur-macroevolution #
 
 Data and code used in our study ‘Early high rates and disparity in the
-evolution of fish-shaped reptiles’, accepted as
+evolution of ichthyosaurs’, published as
 
 > Moon BC & Stubbs TL Early high rates and disparity in the evolution of
-ichthyosaurs. Communications Biology.
+ichthyosaurs. Communications Biology, 3, 68 doi:10.1038/s42003-020-0779-6
 
 # Contents #
 
